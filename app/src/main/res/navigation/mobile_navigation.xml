@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_users"
-        android:name="project.bestscore.ui.dashboard.DashboardFragment"
-        android:label="@string/title_users"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_teammates"
+        android:name="project.bestscore.ui.teammates.TeammatesFragment"
+        android:label="@string/title_teammates"
+        tools:layout="@layout/fragment_teammates" />
 
     <fragment
         android:id="@+id/navigation_events"
-        android:name="project.bestscore.ui.notifications.NotificationsFragment"
+        android:name="project.bestscore.ui.events.EventsFragment"
         android:label="@string/title_events"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_events" />
 </navigation>
