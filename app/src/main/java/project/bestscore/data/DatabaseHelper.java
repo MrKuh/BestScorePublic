@@ -94,7 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String teammate_name = cursor.getString(cursor.getColumnIndex("teammate_name"));
             int teammate_wins = cursor.getInt(cursor.getColumnIndex("teammate_wins"));
             int teamate_id = cursor.getInt(cursor.getColumnIndex("teammate_id"));
-            teammateList.add(new Teammate(teammate_name, teammate_wins, teamate_id));
+            //teammateList.add(new Teammate(teammate_name, teammate_wins, teamate_id));
             cursor.moveToNext();
         }
 
@@ -115,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         for(int i = 0; i < teammateList.size(); i++){
             teammate_event_values.put("event_id", event_values.getAsInteger("event_id"));
-            teammate_event_values.put("teammate_id", teammateList.get(i).getId());
+            //teammate_event_values.put("teammate_id", teammateList.get(i).getId());
         }
 
         sqLiteDatabase.insert(TEAMMATE_EVENT, null, teammate_event_values);
@@ -146,12 +146,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String teammate_name = cursor.getString(cursor.getColumnIndex("teammate_name"));
                 int teammate_wins = cursor.getInt(cursor.getColumnIndex("teammate_wins"));
                 int teamate_id = cursor.getInt(cursor.getColumnIndex("teammate_id"));
-                teammateList.add(new Teammate(teammate_name, teammate_wins, teamate_id));
+                //teammateList.add(new Teammate(teammate_name, teammate_wins, teamate_id));
                 cursor.moveToNext();
             }
 
             if(event_type.equals("Archery")){
-                eventList.add(new Event_Archery(event_date, teammateList, id));
+                //eventList.add(new Event_Archery(event_date, teammateList, id));
             }
 
             cursor.moveToNext();

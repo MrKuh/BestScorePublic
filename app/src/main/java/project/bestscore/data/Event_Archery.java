@@ -11,9 +11,9 @@ public class Event_Archery extends Event{
         super("Archery", date, teammateList, targetList);
     }
 
-    public Event_Archery(LocalDate date, ArrayList<Teammate> teammateList, int id) {
+    /*public Event_Archery(LocalDate date, ArrayList<Teammate> teammateList, int id) {
         super("Archery", date, teammateList, null, id);
-    }
+    }*/
 
     public Event_Archery(LocalDate date, ArrayList<Teammate> teammateList) {
         super("Archery", date, teammateList, null);
