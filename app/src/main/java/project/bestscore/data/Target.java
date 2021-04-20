@@ -5,6 +5,7 @@ public class Target {
     private int number;
     private String name;
     private Event event;
+    private int id;
 
     public Target(int number, String name) {
         this.number = number;
@@ -18,4 +19,6 @@ public class Target {
     public String getName() {
         return name;
     }
+
+    public int getId(){return id;}
 }

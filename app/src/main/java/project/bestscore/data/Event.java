@@ -1,28 +1,45 @@
 package project.bestscore.data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Event {
+public class Event {
 
+    private String name;
     private String type;
-    private LocalDate date;
+    private LocalDateTime date;
     private ArrayList<Teammate> teammateList;
     private ArrayList<Target> targetList;
+    private int id;
     
-    public Event(String type, LocalDate date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList) {
+    public Event(String name, String type, LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList) {
+        this.name = name;
         this.type = type;
         this.date = date;
         this.teammateList = teammateList;
         this.targetList = targetList;
     }
 
+    public Event(String name, String type, LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList, int id) {
+        this.name = name;
+        this.type = type;
+        this.date = date;
+        this.teammateList = teammateList;
+        this.targetList = targetList;
+        this.id = id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getType() {
         return type;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -34,12 +51,21 @@ public abstract class Event {
         return targetList;
     }
 
+    public int getId(){return id;}
+
     @Override
     public String toString() {
         return "Event{" +
-                "type='" + type + '\'' +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
                 ", date=" + date +
                 ", teammateList=" + teammateList +
+                ", targetList=" + targetList +
+                ", id=" + id +
                 '}';
+    }
+
+    public String getName() {
+        return name;
     }
 }

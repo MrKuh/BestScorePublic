@@ -1,31 +1,24 @@
 package project.bestscore.ui.home;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import org.w3c.dom.Text;
-
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-import project.bestscore.MainActivity;
 import project.bestscore.R;
 import project.bestscore.data.DatabaseHelper;
 import project.bestscore.data.Event;
-import project.bestscore.data.Event_Archery;
 import project.bestscore.data.Teammate;
 
 public class HomeFragment extends Fragment {
@@ -42,15 +35,21 @@ public class HomeFragment extends Fragment {
 
         databaseHelper = new DatabaseHelper(getActivity());
 
+        ArrayList<Teammate> teammates = new ArrayList<>();
+        teammates.add(new Teammate("Peter", 4));
+        teammates.add(new Teammate("Sepp", 1));
+
+        //for(int i = 0; i < teammates.size(); i++){
+            //databaseHelper.insertTeammate(teammates.get(i));
+        //}
+
         btnCommit.setOnClickListener(v -> {
 
-            databaseHelper.insertTeammate(new Teammate(etName.getText().toString(),
-                    Integer.valueOf(etWins.getText().toString())));
-
-            Event_Archery event = new Event_Archery(LocalDate.now(), databaseHelper.getTeammates());
-
+            teammates.add(new Teammate(etWins.getText().toString(),4));
+            Event event = new Event(etName.getText().toString(), "Golf", LocalDateTime.now(), teammates, null);
             databaseHelper.insertEvent(event);
 
+            System.out.println(databaseHelper.getTeammates().toString());
             tvList.setText(databaseHelper.getEvents().toString());
         });
 
