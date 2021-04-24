@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -35,18 +36,29 @@ public class HomeFragment extends Fragment {
 
         databaseHelper = new DatabaseHelper(getActivity());
 
-        ArrayList<Teammate> teammates = new ArrayList<>();
-        teammates.add(new Teammate("Peter", 4));
-        teammates.add(new Teammate("Sepp", 1));
+        ArrayList<Teammate> teammates = databaseHelper.getTeammates();
 
-        //for(int i = 0; i < teammates.size(); i++){
-            //databaseHelper.insertTeammate(teammates.get(i));
-        //}
+        tvList.setText(databaseHelper.getEvents().toString());
 
         btnCommit.setOnClickListener(v -> {
 
-            teammates.add(new Teammate(etWins.getText().toString(),4));
+            Teammate teammate = new Teammate(etWins.getText().toString(),4);
+
+            if(!databaseHelper.teammateInserted(teammate)){
+                databaseHelper.insertTeammate(teammate);
+                teammates.add(teammate);
+
+                Toast.makeText(getContext(), "Inserted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Is already in database", Toast.LENGTH_SHORT).show();
+            }
+
             Event event = new Event(etName.getText().toString(), "Golf", LocalDateTime.now(), teammates, null);
+
+            if(databaseHelper.eventInserted(event)){
+                Toast.makeText(getContext(), "Event Is already in database", Toast.LENGTH_SHORT).show();
+            }
+
             databaseHelper.insertEvent(event);
 
             System.out.println(databaseHelper.getTeammates().toString());
