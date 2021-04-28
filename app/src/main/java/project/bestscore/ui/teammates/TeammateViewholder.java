@@ -13,7 +13,7 @@ public class TeammateViewholder extends RecyclerView.ViewHolder {
     private TextView tvWinsOfPlayer;
 
 
-    public TeammateViewholder(@NonNull View itemView, Activity activity, TeammateAdapter adapter, Context context, TextView tvNameOfPlayer, TextView tvWinsOfPlayer) {
+    public TeammateViewholder(@NonNull View itemView, Activity activity, Context context, TextView tvNameOfPlayer, TextView tvWinsOfPlayer) {
         super(itemView);
         this.tvNameOfPlayer = tvNameOfPlayer;
         this.tvWinsOfPlayer = tvWinsOfPlayer;
