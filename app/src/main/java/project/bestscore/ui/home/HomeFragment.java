@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -24,36 +26,16 @@ import project.bestscore.data.Teammate;
 
 public class HomeFragment extends Fragment {
 
-    DatabaseHelper databaseHelper;
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        EditText etName = root.findViewById(R.id.etName);
-        EditText etWins = root.findViewById(R.id.etWins);
-        Button btnCommit = root.findViewById(R.id.btnCommit);
-        TextView tvList = root.findViewById(R.id.tvList);
 
-        databaseHelper = new DatabaseHelper(getActivity());
-
-        ArrayList<Teammate> teammates = databaseHelper.getTeammates();
-        teammates.add(new Teammate("Peter", 5));
-        teammates.add(new Teammate("Sepp", 7));
-
-        teammates.forEach(teammate -> {
-            if(!databaseHelper.teammateInserted(teammate)){
-                databaseHelper.insertTeammate(teammate);
-            }
-        });
-
-        tvList.setText(databaseHelper.getTeammates().toString());
-
-        btnCommit.setOnClickListener(v -> {
-
-            databaseHelper.deleteTeammate(teammates.get(0));
-
-            tvList.setText(databaseHelper.getTeammates().toString());
-        });
+        recyclerView = root.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerView.setAdapter(new GameAdapter());
 
         return root;
     }
