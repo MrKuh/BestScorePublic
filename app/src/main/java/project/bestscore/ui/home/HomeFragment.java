@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -24,46 +26,16 @@ import project.bestscore.data.Teammate;
 
 public class HomeFragment extends Fragment {
 
-    DatabaseHelper databaseHelper;
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        EditText etName = root.findViewById(R.id.etName);
-        EditText etWins = root.findViewById(R.id.etWins);
-        Button btnCommit = root.findViewById(R.id.btnCommit);
-        TextView tvList = root.findViewById(R.id.tvList);
 
-        databaseHelper = new DatabaseHelper(getActivity());
-
-        ArrayList<Teammate> teammates = databaseHelper.getTeammates();
-
-        tvList.setText(databaseHelper.getEvents().toString());
-
-        btnCommit.setOnClickListener(v -> {
-
-            Teammate teammate = new Teammate(etWins.getText().toString(),4);
-
-            if(!databaseHelper.teammateInserted(teammate)){
-                databaseHelper.insertTeammate(teammate);
-                teammates.add(teammate);
-
-                Toast.makeText(getContext(), "Inserted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "Is already in database", Toast.LENGTH_SHORT).show();
-            }
-
-            Event event = new Event(etName.getText().toString(), "Golf", LocalDateTime.now(), teammates, null);
-
-            if(databaseHelper.eventInserted(event)){
-                Toast.makeText(getContext(), "Event Is already in database", Toast.LENGTH_SHORT).show();
-            }
-
-            databaseHelper.insertEvent(event);
-
-            System.out.println(databaseHelper.getTeammates().toString());
-            tvList.setText(databaseHelper.getEvents().toString());
-        });
+        recyclerView = root.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+        recyclerView.setAdapter(new GameAdapter());
 
         return root;
     }
