@@ -3,13 +3,11 @@ package project.bestscore.data;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -149,10 +147,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor.getInt(cursor.getColumnIndex(TEAMMATE_ID));
     }
 
-    public void updateTeammate(Teammate teammate){
+    public boolean updateTeammate(@NotNull Teammate teammate){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
+        cv.put(TEAMMATE_NAME, teammate.getName());
+        cv.put(TEAMMATE_WINS, teammate.getWins());
+
+        long result = db.update(TEAMMATE, cv, TEAMMATE_ID + "=?", new String[]{String.valueOf(teammate.getId())});
+
+        if(result == -1){
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public boolean deleteTeammate(@NotNull Teammate teammate){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long result = db.delete(TEAMMATE, TEAMMATE_ID + "=?", new String[]{String.valueOf(teammate.getId())});
+
+        if(result == -1){
+            return false;
+        }
+
+        return true;
     }
 
     public boolean insertEvent(@NotNull Event event) {

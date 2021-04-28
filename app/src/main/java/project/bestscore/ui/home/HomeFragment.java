@@ -37,32 +37,22 @@ public class HomeFragment extends Fragment {
         databaseHelper = new DatabaseHelper(getActivity());
 
         ArrayList<Teammate> teammates = databaseHelper.getTeammates();
+        teammates.add(new Teammate("Peter", 5));
+        teammates.add(new Teammate("Sepp", 7));
 
-        tvList.setText(databaseHelper.getEvents().toString());
+        teammates.forEach(teammate -> {
+            if(!databaseHelper.teammateInserted(teammate)){
+                databaseHelper.insertTeammate(teammate);
+            }
+        });
+
+        tvList.setText(databaseHelper.getTeammates().toString());
 
         btnCommit.setOnClickListener(v -> {
 
-            Teammate teammate = new Teammate(etWins.getText().toString(),4);
+            databaseHelper.deleteTeammate(teammates.get(0));
 
-            if(!databaseHelper.teammateInserted(teammate)){
-                databaseHelper.insertTeammate(teammate);
-                teammates.add(teammate);
-
-                Toast.makeText(getContext(), "Inserted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "Is already in database", Toast.LENGTH_SHORT).show();
-            }
-
-            Event event = new Event(etName.getText().toString(), "Golf", LocalDateTime.now(), teammates, null);
-
-            if(databaseHelper.eventInserted(event)){
-                Toast.makeText(getContext(), "Event Is already in database", Toast.LENGTH_SHORT).show();
-            }
-
-            databaseHelper.insertEvent(event);
-
-            System.out.println(databaseHelper.getTeammates().toString());
-            tvList.setText(databaseHelper.getEvents().toString());
+            tvList.setText(databaseHelper.getTeammates().toString());
         });
 
         return root;
