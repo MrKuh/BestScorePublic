@@ -17,15 +17,15 @@ import project.bestscore.R;
 public class GameAdapter extends RecyclerView.Adapter<GameHolder> {
 
     private List<GameModel> games = Arrays.asList(
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch),
-            new GameModel("Bogenschießen", R.drawable.arch)
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Golfen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery),
+            new GameModel("Bogenschießen", R.drawable.ic_archery)
 
     );
 
