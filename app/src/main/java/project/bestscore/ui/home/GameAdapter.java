@@ -26,10 +26,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameHolder> {
             new GameModel("Bogenschießen", R.drawable.ic_archery),
             new GameModel("Bogenschießen", R.drawable.ic_archery),
             new GameModel("Bogenschießen", R.drawable.ic_archery)
-
     );
-
-
 
     @NonNull
     @Override
