@@ -1,5 +1,7 @@
 package project.bestscore.ui.teammates;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,13 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import org.w3c.dom.ls.LSOutput;
-
 import project.bestscore.R;
 
 public class TeammateAdd extends AppCompatActivity {
+
     private EditText edNameOfNewPlayer;
     private EditText edWinsOfNewPlayer;
     private ImageButton btnAddPlayer;

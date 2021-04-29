@@ -1,18 +1,16 @@
 package project.bestscore.ui.teammates;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +46,7 @@ public class TeammatesFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //adapter.filter(newText);
+                adapter.filter(newText);
                 return false;
             }
         });
@@ -57,11 +55,24 @@ public class TeammatesFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TeammateAdd.class);
+                startActivityForResult(intent, 100);
             }
         });
 
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==100&&resultCode==20){
+            String name = data.getStringExtra("name");
+            int wins = data.getIntExtra("wins", 0);
+            Teammate newTeammate = new Teammate(name, wins);
+            adapter.newTeammate(newTeammate);
+        }
     }
 }
