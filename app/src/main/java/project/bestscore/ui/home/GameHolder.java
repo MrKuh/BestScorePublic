@@ -23,17 +23,16 @@ public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickL
     private TextView tvName;
     Context context;
 
-    public GameHolder(@NonNull View itemView, TextView tvName, ImageView imgBow, MainActivity main) {
+    public GameHolder(@NonNull View itemView, TextView tvName, ImageView imgBow) {
         super(itemView);
         this.imgBow = imgBow;
         this.tvName = tvName;
-        this.context = main.getContext();
         itemView.setOnClickListener(v -> {
 
             System.out.println(tvName.getText() + ": ausgewählt");
 
-            Intent intent = new Intent(context, Map.class);
-            v.getContext().startActivity(intent);
+            //Intent intent = new Intent(context, Map.class);
+            //v.getContext().startActivity(intent);
 
         });
     }
