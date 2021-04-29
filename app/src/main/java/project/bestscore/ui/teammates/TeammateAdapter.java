@@ -21,13 +21,16 @@ public class TeammateAdapter extends RecyclerView.Adapter<TeammateViewholder> {
 
     private Context context;
     private Activity activity;
+    private List<Teammate> teammateListAll;
     private List<Teammate> teammateList;
+    private DatabaseHelper databaseHelper;
+    private String filter = "";
 
     public TeammateAdapter(Context context, Activity activity) {
         this.context = context;
         this.activity = activity;
         //teammateList.add(new Teammate())
-        DatabaseHelper databaseHelper = new DatabaseHelper(context);
+        databaseHelper = new DatabaseHelper(context);
         Teammate mate = new Teammate("Martin", 50);
         if(!databaseHelper.teammateInserted(mate)){
             databaseHelper.insertTeammate(mate);
@@ -45,12 +48,7 @@ public class TeammateAdapter extends RecyclerView.Adapter<TeammateViewholder> {
             databaseHelper.insertTeammate(mate);
         }
 
-        mate = new Teammate("Martinnnn", 10);
-        if(!databaseHelper.teammateInserted(mate)){
-            databaseHelper.insertTeammate(mate);
-        }
-
-        teammateList = databaseHelper.getTeammates();
+        updateList();
     }
 
     @NonNull
@@ -60,7 +58,7 @@ public class TeammateAdapter extends RecyclerView.Adapter<TeammateViewholder> {
                 .inflate(R.layout.fragment_teammates_item,parent,false);
         TextView tvNameOfPlayer = view.findViewById(R.id.tvNameOfPlayer);
         TextView tvWinsOfPlayer = view.findViewById(R.id.tvWinsOfPlayer);
-        TeammateViewholder holder = new TeammateViewholder(view, activity, context, tvNameOfPlayer, tvWinsOfPlayer);
+        TeammateViewholder holder = new TeammateViewholder(view, context, this, tvNameOfPlayer, tvWinsOfPlayer);
         return holder;
     }
 
@@ -76,5 +74,42 @@ public class TeammateAdapter extends RecyclerView.Adapter<TeammateViewholder> {
     @Override
     public int getItemCount() {
         return teammateList.size();
+    }
+
+    public void newTeammate(Teammate newMate) {
+        if(!databaseHelper.teammateInserted(newMate)){
+            databaseHelper.insertTeammate(newMate);
+        }
+        updateList();
+        notifyDataSetChanged();
+    }
+
+    public void filter(String filter){
+        this.filter = filter;
+        if(filter.isEmpty()){
+            teammateList = new ArrayList<>(teammateListAll);
+        }else{
+            teammateList = new ArrayList<>();
+            for (Teammate contact:teammateListAll) {
+                if(contact.getName().toLowerCase().contains(filter.toLowerCase())||
+                        contact.getName().toLowerCase().contains(filter.toLowerCase())){
+                    teammateList.add(contact);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public List<Teammate> getTeammateList() {
+        return teammateList;
+    }
+
+    public DatabaseHelper getDatabaseHelper() {
+        return databaseHelper;
+    }
+
+    public void updateList(){
+        teammateListAll = databaseHelper.getTeammates();
+        filter(filter);
     }
 }
