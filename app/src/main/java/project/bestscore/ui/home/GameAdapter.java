@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
+import project.bestscore.MainActivity;
 import project.bestscore.R;
 
 public class GameAdapter extends RecyclerView.Adapter<GameHolder> {

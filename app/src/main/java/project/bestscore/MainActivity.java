@@ -1,5 +1,7 @@
 package project.bestscore;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -11,13 +13,19 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import project.bestscore.data.DatabaseHelper;
+import project.bestscore.ui.home.GameHolder;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static MainActivity instance;
+    public static MainActivity getInstance(){
+        return instance;
+    }
     DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        instance = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -29,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+
     }
+
+    public Context getContext(){
+        return this;
+    }
+
 
 }

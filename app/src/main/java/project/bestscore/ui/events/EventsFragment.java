@@ -36,6 +36,7 @@ public class EventsFragment extends Fragment {
                 LocalDateTime.now(), null, null);
 
         events.add(event);
+        events.add(event);
 
         rvEvents = root.findViewById(R.id.rvEvents);
         rvEvents.setHasFixedSize(true);
