@@ -45,6 +45,11 @@ public class TeammateAdapter extends RecyclerView.Adapter<TeammateViewholder> {
             databaseHelper.insertTeammate(mate);
         }
 
+        mate = new Teammate("Martinnnn", 10);
+        if(!databaseHelper.teammateInserted(mate)){
+            databaseHelper.insertTeammate(mate);
+        }
+
         teammateList = databaseHelper.getTeammates();
     }
 
