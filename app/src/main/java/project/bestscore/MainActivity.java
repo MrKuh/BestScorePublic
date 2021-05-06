@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public Context getContext(){
-        return this;
-    }
 
 
 }

@@ -1,8 +1,11 @@
 package project.bestscore.ui.home;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +31,14 @@ public class GameAdapter extends RecyclerView.Adapter<GameHolder> {
             new GameModel("Bogenschießen", R.drawable.ic_archery),
             new GameModel("Bogenschießen", R.drawable.ic_archery)
     );
+    private Activity activity;
+    private Context context;
+
+    public GameAdapter(Activity activity, Context context) {
+        this.activity = activity;
+        this.context = context;
+
+    }
 
     @NonNull
     @Override
@@ -35,7 +46,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_home_item,parent,false);
         TextView tvName = view.findViewById(R.id.modelDetailView);
         ImageView ivPicture = view.findViewById(R.id.modelImageView);
-        GameHolder gameHolder = new GameHolder(view, tvName, ivPicture);
+        GameHolder gameHolder = new GameHolder(view, tvName, ivPicture, activity, context);
         return gameHolder;
     }
 

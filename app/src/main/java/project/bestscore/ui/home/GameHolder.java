@@ -1,5 +1,6 @@
 package project.bestscore.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -21,18 +22,15 @@ public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     private ImageView imgBow;
     private TextView tvName;
-    Context context;
 
-    public GameHolder(@NonNull View itemView, TextView tvName, ImageView imgBow) {
+    public GameHolder(@NonNull View itemView, TextView tvName, ImageView imgBow, Activity activity, Context context) {
         super(itemView);
         this.imgBow = imgBow;
         this.tvName = tvName;
+        
         itemView.setOnClickListener(v -> {
 
             System.out.println(tvName.getText() + ": ausgewählt");
-
-            //Intent intent = new Intent(context, Map.class);
-            //v.getContext().startActivity(intent);
 
         });
     }
