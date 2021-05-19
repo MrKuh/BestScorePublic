@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,
                 LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new GameAdapter());
+        recyclerView.setAdapter(new GameAdapter(getContext()));
 
         return root;
     }
