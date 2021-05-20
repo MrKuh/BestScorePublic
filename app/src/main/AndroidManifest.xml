@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BestScore">
-        <activity android:name=".ui.game.GameSettingActivity"></activity>
+        <activity android:name=".ui.game_settings.CountMethods"></activity>
+        <activity android:name=".ui.game_settings.GameSettingActivity" />
         <activity android:name=".ui.teammates.TeammateAdd" />
         <activity
             android:name=".MainActivity"

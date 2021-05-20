@@ -1,4 +1,4 @@
-package project.bestscore.ui.game;
+package project.bestscore.ui.game_settings;
 
 import android.view.View;
 import android.widget.EditText;

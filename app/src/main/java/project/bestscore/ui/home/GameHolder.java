@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.bestscore.ui.game.GameSettingActivity;
+import project.bestscore.ui.game_settings.GameSettingActivity;
 
 public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
