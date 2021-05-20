@@ -13,7 +13,7 @@ public class Event {
     private LocalDateTime date;
     private ArrayList<Teammate> teammateList;
     private ArrayList<Target> targetList;
-    private int id;
+    private int id;////////////////////////
     
     public Event(String name, String type, String parkour, LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList) {
         this.name = name;

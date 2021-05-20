@@ -3,11 +3,16 @@
     <string name="title_home">Home</string>
     <string name="title_teammates">Teammates</string>
     <string name="title_events">Events</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_map">MapActivity</string>
-    <string name="title_activity_maps">Map</string>
+
+    <string name="settings_event_name">Name:</string>
+    <string name="settings_parkour">Parkour:</string>
+    <string name="settings_teammates">Teammates:</string>
+    <string name="settings_count_method">Zählweise:</string>
+    <string name="settings_zone1">Zone 1:</string>
+    <string name="settings_select">SELECT</string>
+    <string name="settings_event_name_value">Event #1</string>
+    <string name="settings_start">START</string>
+    <string name="settings_arrow">Arrow</string>
+
+
 </resources>

@@ -1,6 +1,5 @@
 package project.bestscore.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +37,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,
                 LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(new GameAdapter(getActivity(), getContext()));
-
+        recyclerView.setAdapter(new GameAdapter(getContext()));
 
         return root;
     }
