@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import project.bestscore.ui.parcours.Parcour;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "bestScore_database";
@@ -20,6 +22,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TEAMMATE_ID = "teammate_id";
     private static final String TEAMMATE_NAME = "teammate_name";
     private static final String TEAMMATE_WINS = "teammate_wins";
+
+    private static final String PARCOUR = "Parcour";
+    private static final String PARCOUR_ID = "parcour_id";
+    private static final String PARCOUR_NAME = "parcour_name";
 
     private static final String EVENT = "Event";
     private static final String EVENT_ID = "event_id";
@@ -53,6 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "(" + TARGET_ID + " INTEGER PRIMARY KEY," + EVENT_ID + " INTEGER,FOREIGN KEY(" + EVENT_ID + ") REFERENCES "
                 + EVENT + "(" + EVENT_ID + "))";
 
+        String parcour = "CREATE TABLE " + PARCOUR +
+                "(" + PARCOUR_ID + " INTEGER PRIMARY KEY," + PARCOUR_NAME + " TEXT NOT NULL UNIQUE)";
+
         String teammate_event = "CREATE TABLE " + TEAMMATE_EVENT +
                 "(" + TEAMMATE_ID + " INTEGER, " + EVENT_ID + " INTEGER," +
                 "PRIMARY KEY (" + TEAMMATE_ID + "," + EVENT_ID + ")," +
@@ -69,6 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(teammate);
         db.execSQL(event);
         db.execSQL(target);
+        db.execSQL(parcour);
         db.execSQL(teammate_event);
         db.execSQL(teammate_event_target);
 
@@ -77,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TEAMMATE);
+        db.execSQL("DROP TABLE IF EXISTS " + PARCOUR);
         db.execSQL("DROP TABLE IF EXISTS " + EVENT);
         db.execSQL("DROP TABLE IF EXISTS " + TARGET);
         db.execSQL("DROP TABLE IF EXISTS " + TEAMMATE_EVENT);
@@ -175,6 +186,95 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+
+    public boolean insertParcour(@NotNull Parcour parcour) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues parcour_values = new ContentValues();
+        parcour_values.put(PARCOUR_NAME, parcour.getParcourName());
+
+        long result = sqLiteDatabase.insert(PARCOUR, null, parcour_values);
+
+        if (result == -1) {
+            return false;
+        }
+        parcour.setId(getParcourID(parcour.getParcourName()));
+
+        return true;
+    }
+
+    public boolean parcourInserted(Parcour parcour){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + PARCOUR, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String parcour_name = cursor.getString(cursor.getColumnIndex(PARCOUR_NAME));
+            int parcour_id = cursor.getInt(cursor.getColumnIndex(PARCOUR_ID));
+
+            if(parcour_id == parcour.getId() || parcour_name.equals(parcour.getParcourName())){
+                return true;
+            }
+
+            cursor.moveToNext();
+        }
+
+        return false;
+    }
+
+    public ArrayList getParcour() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<Parcour> parcourList = new ArrayList<>();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + PARCOUR, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String parcour_name = cursor.getString(cursor.getColumnIndex(PARCOUR_NAME));
+            int parcour_id = cursor.getInt(cursor.getColumnIndex(PARCOUR_ID));
+            parcourList.add(new Parcour(parcour_name, parcour_id));
+            cursor.moveToNext();
+        }
+        return parcourList;
+    }
+
+    public int getParcourID(String parcourName){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT " +  PARCOUR_ID + " FROM " + PARCOUR + " WHERE " + PARCOUR_NAME , null);
+
+        cursor.moveToFirst();
+
+        return cursor.getInt(cursor.getColumnIndex(PARCOUR_ID));
+    }
+
+    public boolean updateParcour(@NotNull Parcour parcour){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(PARCOUR_NAME, parcour.getParcourName());
+
+        long result = db.update(PARCOUR, cv, PARCOUR_ID + "=?", new String[]{String.valueOf(parcour.getId())});
+
+        if(result == -1){
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public boolean deleteParcour(@NotNull Parcour parcour){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long result = db.delete(PARCOUR, PARCOUR_ID + "=?", new String[]{String.valueOf(parcour.getId())});
+
+        if(result == -1){
+            return false;
+        }
+
+        return true;
+    }
+
 
     public boolean insertEvent(@NotNull Event event) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
