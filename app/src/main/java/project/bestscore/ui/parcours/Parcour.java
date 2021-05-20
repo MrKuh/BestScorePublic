@@ -2,16 +2,15 @@ package project.bestscore.ui.parcours;
 
 public class Parcour {
     private String parcourName;
-    private int parcour_Id;
     private int id = -1; //Brauche ich um zu schauen ob Teammate schon in der Datenbank ist
 
     public Parcour(String parcourName) {
         this.parcourName = parcourName ;
     }
 
-    public Parcour(String parcourName, int parcour_ID) {
+    public Parcour(String parcourName, int id) {
         this.parcourName = parcourName ;
-        this.parcour_Id = parcour_ID;
+        this.id = id;
     }
 
     public String getParcourName() {
