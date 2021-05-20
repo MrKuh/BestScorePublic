@@ -1,4 +1,4 @@
-package project.bestscore.ui.game_settings;
+package project.bestscore.ui.home.game_settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
