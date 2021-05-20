@@ -1,41 +1,29 @@
-package project.bestscore.ui.home.playerselection;
+package project.bestscore.ui.home.selection.parcour;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.bestscore.R;
-import project.bestscore.data.Teammate;
-import project.bestscore.ui.teammates.TeammateAdapter;
+import project.bestscore.ui.parcours.Parcour;
 
-public class TeammateSelectionViewholder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
-    private TextView tvNameOfPlayer;
-    private TextView tvWinsOfPlayer;
-    private ConstraintLayout clBackground;
-    private TeammateSelection teammateSelection;
-    private TeammateSelectionAdapter adapter;
-    private boolean selected;
+public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
+    private TextView tvNameOfParcour;
+    private ParcourSelectionAdapter adapter;
     private final GestureDetectorCompat mGestureDetector;
     private static final String TAG = "MyApp";
 
 
-    public TeammateSelectionViewholder(@NonNull View itemView, Context context, TeammateSelectionAdapter adapter, TextView tvNameOfPlayer, TextView tvWinsOfPlayer, ConstraintLayout clBackground, TeammateSelection teammateSelection) {
+    public ParcourSelectionHolder(@NonNull View itemView, Context context, ParcourSelectionAdapter adapter, TextView tvNameOfPlayer) {
         super(itemView);
-        this.tvNameOfPlayer = tvNameOfPlayer;
-        this.tvWinsOfPlayer = tvWinsOfPlayer;
-        this.clBackground = clBackground;
-        this.teammateSelection = teammateSelection;
+        this.tvNameOfParcour = tvNameOfPlayer;
         this.adapter = adapter;
-        selected = true;
 
         MyGestureListener mgl = new MyGestureListener();
         mGestureDetector = new GestureDetectorCompat(context, mgl);
@@ -43,12 +31,8 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
         itemView.setOnClickListener(this);
     }
 
-    public TextView getTvNameOfPlayer() {
-        return tvNameOfPlayer;
-    }
-
-    public TextView getTvWinsOfPlayer() {
-        return tvWinsOfPlayer;
+    public TextView getTvNameOfParcour() {
+        return tvNameOfParcour;
     }
 
     @Override
@@ -58,15 +42,7 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
 
     @Override
     public void onClick(View v) {
-        if(selected){
-            selected = false;
-            teammateSelection.addSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
-        }else{
-            selected = true;
-            teammateSelection.deleteSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded);
-        }
+        System.out.println("Hier passiert nichts");
     }
 
     private class MyGestureListener
@@ -86,8 +62,8 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
                     Log.i(TAG, "swipe left");
                 } else {
                     Log.i(TAG, "swipe right");
-                    Teammate mate = adapter.getTeammateList().get(getAdapterPosition());
-                    adapter.getDatabaseHelper().deleteTeammate(mate);
+                    Parcour parcour = adapter.getParcourList().get(getAdapterPosition());
+                    adapter.getDatabaseHelper().deleteParcour(parcour);
                     adapter.updateList();
                     adapter.notifyDataSetChanged();
                 }

@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.playerselection;
+package project.bestscore.ui.home.selection.player;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,6 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.Teammate;
-import project.bestscore.ui.teammates.TeammateAdapter;
 import project.bestscore.ui.teammates.TeammateAdd;
 
 public class TeammateSelection extends AppCompatActivity {
@@ -91,7 +90,7 @@ public class TeammateSelection extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==100&&resultCode==20){
+        if(requestCode == 100 && resultCode == 20){
             String name = data.getStringExtra("name");
             int wins = data.getIntExtra("wins", 0);
             Teammate newTeammate = new Teammate(name, wins);

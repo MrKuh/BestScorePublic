@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.playerselection;
+package project.bestscore.ui.home.selection.player;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,6 @@ import java.util.List;
 import project.bestscore.R;
 import project.bestscore.data.DatabaseHelper;
 import project.bestscore.data.Teammate;
-import project.bestscore.ui.teammates.TeammateViewholder;
 
 public class TeammateSelectionAdapter extends RecyclerView.Adapter<TeammateSelectionViewholder> {
 

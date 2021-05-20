@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import project.bestscore.R;
 
-public class ParcourActivity extends AppCompatActivity {
+public class ParcourAc extends AppCompatActivity {
     private RecyclerView rvParcour;
     private ParcourAdapter adapter;
     private ImageButton btnAdd;
@@ -53,7 +53,7 @@ public class ParcourActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ParcourActivity.this, ParcourAdd.class);
+                Intent intent = new Intent(ParcourAc.this, ParcourAdd.class);
                 startActivityForResult(intent, 100);
             }
         });
