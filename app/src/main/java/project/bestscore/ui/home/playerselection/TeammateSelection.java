@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +77,12 @@ public class TeammateSelection extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = getIntent();
+                Bundle args = new Bundle();
+                args.putSerializable("selectedMates", (Serializable) teammatesSelected);
+                intent.putExtra("bundle",args);
+                setResult(20, intent);
+                finish();
             }
         });
     }
