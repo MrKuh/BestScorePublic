@@ -10,13 +10,13 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import project.bestscore.R;
 
-public class ParcourFragment extends Fragment {
+public class ParcourActivity extends AppCompatActivity {
     private RecyclerView rvParcour;
     private ParcourAdapter adapter;
     private ImageButton btnAdd;
@@ -31,8 +31,8 @@ public class ParcourFragment extends Fragment {
         svSearch = root.findViewById(R.id.svSearch);
 
         rvParcour.setHasFixedSize(true);
-        rvParcour.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        adapter = new ParcourAdapter(this.getContext(),this.getActivity());
+        rvParcour.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ParcourAdapter(this,this);
         rvParcour.setAdapter(adapter);
 
 
@@ -53,7 +53,7 @@ public class ParcourFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ParcourAdd.class);
+                Intent intent = new Intent(ParcourActivity.this, ParcourAdd.class);
                 startActivityForResult(intent, 100);
             }
         });
@@ -66,7 +66,7 @@ public class ParcourFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==100&&resultCode==20){
+        if(requestCode == 100 && resultCode == 20){
             String name = data.getStringExtra("name");
             Parcour newParcour = new Parcour(name);
             adapter.newParcour(newParcour);

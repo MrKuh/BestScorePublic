@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.bestscore.ui.game_settings.GameSettingActivity;
+import project.bestscore.ui.parcours.ParcourActivity;
 
 public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -24,7 +24,7 @@ public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
             System.out.println(tvName.getText() + ": ausgewählt");
 
-            Intent i = new Intent(context, GameSettingActivity.class);
+            Intent i = new Intent(context, ParcourActivity.class);
             context.startActivity(i);
 
         });
