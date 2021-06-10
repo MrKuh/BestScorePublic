@@ -2,23 +2,43 @@ package project.bestscore.data;
 
 public class Target {
 
-    private int number;
+    private int index;
     private String name;
-    private Event event;
+
     private int id;
 
     public Target(int number, String name) {
-        this.number = number;
+        this.index = number;
         this.name = name;
     }
 
-    public int getNumber() {
-        return number;
+    public Target(int number, String name, int id) {
+        this.index = number;
+        this.name = name;
+        this.id = id;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getId(){return id;}
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

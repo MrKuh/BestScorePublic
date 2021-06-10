@@ -8,18 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.Teammate;
+import project.bestscore.ui.home.game_settings.GameSettingActivity;
 import project.bestscore.ui.teammates.TeammateAdd;
 
 public class TeammateSelection extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class TeammateSelection extends AppCompatActivity {
 
         teammatesSelected = new ArrayList<>();
 
-        rvPlayers = findViewById(R.id.rvPlayers);
+        rvPlayers = findViewById(R.id.rvCountMethods);
         btnAdd = findViewById(R.id.btnAdd);
         svSearch = findViewById(R.id.svSearch);
         context = this;
@@ -77,10 +76,16 @@ public class TeammateSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
+                intent.putExtra("amount", teammatesSelected.size());
+
+                setResult(GameSettingActivity.REQ_CODE_TEAMMATE, intent);
+
+                /*
                 Bundle args = new Bundle();
                 args.putSerializable("selectedMates", (Serializable) teammatesSelected);
                 intent.putExtra("bundle",args);
-                setResult(20, intent);
+                setResult(GameSettingActivity.REQ_CODE_TEAMMATE, intent);
+                 */
                 finish();
             }
         });

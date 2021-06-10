@@ -1,4 +1,4 @@
-package project.bestscore.ui.parcours;
+package project.bestscore.ui.parcours_old;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,15 +7,12 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import project.bestscore.R;
-import project.bestscore.ui.teammates.TeammateAdd;
 
-public class ParcourAdd extends AppCompatActivity {
+public class ParcourAdd_old extends AppCompatActivity {
     private EditText edNameOfNewParcour;
     private ImageButton btnAddParcour;
 
@@ -24,7 +21,7 @@ public class ParcourAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actvity_parcour_add);
 
-        edNameOfNewParcour = findViewById(R.id.edNameOfNewParcour);
+        edNameOfNewParcour = findViewById(R.id.tvNameOfCountMethod);
         btnAddParcour = findViewById(R.id.btnAddParcour);
         btnAddParcour.setEnabled(false);
 

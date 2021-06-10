@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import project.bestscore.R;
 import project.bestscore.data.Event;
+import project.bestscore.ui.home.selection.parcour.Parcour;
 
 public class EventsFragment extends Fragment {
 
@@ -26,7 +27,7 @@ public class EventsFragment extends Fragment {
 
         ArrayList<Event> events = new ArrayList<>();
 
-        Event event = new Event("Familienfeier", "Archery", "Griasboch",
+        Event event = new Event("Familienfeier", "Archery", new Parcour("Griasboch"),
                 LocalDateTime.now(), null, null);
 
         events.add(event);

@@ -1,4 +1,4 @@
-package project.bestscore.ui.parcours;
+package project.bestscore.ui.parcours_old;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ParcourHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
+public class ParcourHolder_old extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
     private TextView tvNameOfParcour;
-    private ParcourAdapter adapter;
+    private ParcourAdapter_old adapter;
     private final GestureDetectorCompat mGestureDetector;
     private static final String TAG = "MyApp";
 
 
-    public ParcourHolder(@NonNull View itemView, Context context, ParcourAdapter adapter, TextView tvNameOfPlayer) {
+    public ParcourHolder_old(@NonNull View itemView, Context context, ParcourAdapter_old adapter, TextView tvNameOfPlayer) {
         super(itemView);
         this.tvNameOfParcour = tvNameOfPlayer;
         this.adapter = adapter;
 
-        ParcourHolder.MyGestureListener mgl = new ParcourHolder.MyGestureListener();
+        ParcourHolder_old.MyGestureListener mgl = new ParcourHolder_old.MyGestureListener();
         mGestureDetector = new GestureDetectorCompat(context, mgl);
         itemView.setOnTouchListener(this);
         itemView.setOnClickListener(this);
@@ -60,10 +60,13 @@ public class ParcourHolder extends RecyclerView.ViewHolder implements View.OnCli
                     Log.i(TAG, "swipe left");
                 } else {
                     Log.i(TAG, "swipe right");
-                    Parcour parcour = adapter.getParcourList().get(getAdapterPosition());
+                    Parcour2_old parcour = adapter.getParcourList().get(getAdapterPosition());
+                    /*
                     adapter.getDatabaseHelper().deleteParcour(parcour);
                     adapter.updateList();
                     adapter.notifyDataSetChanged();
+
+                     */
                 }
             }
             if (deltaYAbs > MIN_DIST && deltaXAbs < MAX_DIST) {

@@ -13,8 +13,9 @@
         <activity android:name=".ui.home.game_settings.CountMethods" />
         <activity android:name=".ui.home.game_settings.GameSettingActivity" />
         <activity android:name=".ui.teammates.TeammateAdd" />
-        <activity android:name=".ui.parcours.ParcourAc" />
+        <activity android:name=".ui.parcours_old.ParcourAc_old" />
         <activity android:name=".ui.home.selection.player.TeammateSelection" />
+        <activity android:name=".ui.home.selection.parcour.ParcourAdd" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

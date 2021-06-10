@@ -5,7 +5,7 @@
     <string name="title_events">Events</string>
 
     <string name="settings_event_name">Name:</string>
-    <string name="settings_parkour">Parkour:</string>
+    <string name="settings_parcour">Parcour:</string>
     <string name="settings_teammates">Teammates:</string>
     <string name="settings_count_method">Zählweise:</string>
     <string name="settings_zone1">Zone 1:</string>
@@ -13,6 +13,11 @@
     <string name="settings_event_name_value">Event #1</string>
     <string name="settings_start">START</string>
     <string name="settings_arrow">Arrow</string>
+    <string name="settings_parcour_add">Parcour hinzufügen:</string>
+    <string name="settings_teammate_add">Teammate hinzufügen:</string>
+    <string name="settings_countmethod_add">Countmethod hinzufügen:</string>
+    <string name="settings_wins_add">Wins:</string>
+    <string name="settings_name_add">Name:</string>
 
 
 </resources>

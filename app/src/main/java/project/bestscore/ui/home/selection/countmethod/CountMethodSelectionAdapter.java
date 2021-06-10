@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.selection.parcour;
+package project.bestscore.ui.home.selection.countmethod;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,9 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.DatabaseHelper;
+import project.bestscore.ui.home.selection.parcour.Parcour;
 
-public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelectionHolder> {
+public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMethodSelectionHolder> {
     private Context context;
     private Activity activity;
     private List<Parcour> parcourListAll;
@@ -24,7 +25,7 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
     private DatabaseHelper databaseHelper;
     private String filter = "";
 
-    public ParcourSelectionAdapter(Context context, Activity activity) {
+    public CountMethodSelectionAdapter(Context context, Activity activity) {
         this.context = context;
         this.activity = activity;
         /*
@@ -33,6 +34,7 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
         if(!databaseHelper.parcourInserted(parcour)){
             databaseHelper.insertParcour(parcour);
         }
+
          */
 
         updateList();
@@ -40,16 +42,16 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
 
     @NonNull
     @Override
-    public ParcourSelectionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CountMethodSelectionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_parkour_item,parent,false);
-        TextView tvNameOfParcour = view.findViewById(R.id.tvNameOfParcour);
-        ParcourSelectionHolder parkourHolder = new ParcourSelectionHolder(view, context, this,tvNameOfParcour);
+        TextView tvNameOfCountMethod = view.findViewById(R.id.tvNameOfParcour);
+        CountMethodSelectionHolder parkourHolder = new CountMethodSelectionHolder(view, context, this,tvNameOfCountMethod);
         return parkourHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ParcourSelectionHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CountMethodSelectionHolder holder, int position) {
         Parcour parcour = parcourList.get(position);
         holder.getTvNameOfParcour().setText(parcour.getName());
     }
@@ -91,7 +93,7 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
     }
 
     public void updateList(){
-        //parcourListAll = databaseHelper.getParcours();
+        parcourListAll = databaseHelper.getParcours();
         ArrayList<Parcour> pacours = new ArrayList<Parcour>();
         pacours.add(new Parcour("TEST"));
         parcourListAll = pacours;

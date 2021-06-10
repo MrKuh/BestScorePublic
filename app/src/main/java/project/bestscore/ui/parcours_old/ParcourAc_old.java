@@ -1,4 +1,4 @@
-package project.bestscore.ui.parcours;
+package project.bestscore.ui.parcours_old;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,23 +16,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import project.bestscore.R;
 
-public class ParcourAc extends AppCompatActivity {
+public class ParcourAc_old extends AppCompatActivity {
     private RecyclerView rvParcour;
-    private ParcourAdapter adapter;
+    private ParcourAdapter_old adapter;
     private ImageButton btnAdd;
     private SearchView svSearch;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_parkour, container, false);
+        View root = inflater.inflate(R.layout.activity_parkour_item, container, false);
         //final TextView textView = root.findViewById(R.id.text_teammates);
-        rvParcour = root.findViewById(R.id.rvPlayers);
+        rvParcour = root.findViewById(R.id.rvCountMethods);
         btnAdd = root.findViewById(R.id.btnAdd);
         svSearch = root.findViewById(R.id.svSearch);
 
         rvParcour.setHasFixedSize(true);
         rvParcour.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ParcourAdapter(this,this);
+        adapter = new ParcourAdapter_old(this,this);
         rvParcour.setAdapter(adapter);
 
 
@@ -53,7 +53,7 @@ public class ParcourAc extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ParcourAc.this, ParcourAdd.class);
+                Intent intent = new Intent(ParcourAc_old.this, ParcourAdd_old.class);
                 startActivityForResult(intent, 100);
             }
         });
@@ -68,8 +68,8 @@ public class ParcourAc extends AppCompatActivity {
 
         if(requestCode == 100 && resultCode == 20){
             String name = data.getStringExtra("name");
-            Parcour newParcour = new Parcour(name);
-            adapter.newParcour(newParcour);
+            Parcour2_old newParcour = new Parcour2_old(name);
+            //adapter.newParcour(newParcour);
         }
     }
 

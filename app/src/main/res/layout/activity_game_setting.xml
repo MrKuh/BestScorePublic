@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/settings_start"
+                android:text="@string/settings_event_name"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,6 +45,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:inputType="textPersonName"
+                android:maxLength="14"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="@string/settings_event_name_value"
@@ -52,7 +53,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/eventName"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/settings_parkour"
+                android:text="@string/settings_parcour"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -88,6 +90,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/settings_background_white_rounded"
                 android:gravity="center"
+                android:maxLength="14"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="@string/settings_select"
@@ -131,6 +134,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/settings_background_white_rounded"
                 android:gravity="center"
+                android:maxLength="14"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="@string/settings_select"
@@ -175,6 +179,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/settings_background_white_rounded"
                 android:gravity="center"
+                android:maxLength="14"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
                 android:text="@string/settings_select"
@@ -204,7 +209,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCount"
+            android:id="@+id/rvCountmethods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -227,7 +232,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvCount"
+            app:layout_constraintTop_toBottomOf="@+id/rvCountmethods"
             app:layout_constraintVertical_bias="0.0">
 
             <TextView

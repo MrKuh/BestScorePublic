@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import project.bestscore.ui.home.game_settings.GameSettingActivity;
+import project.bestscore.ui.home.selection.parcour.ParcourSelection;
 import project.bestscore.ui.home.selection.player.TeammateSelection;
 
 public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -24,7 +26,7 @@ public class GameHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
             System.out.println(tvName.getText() + ": ausgewählt");
 
-            Intent i = new Intent(context, TeammateSelection.class);
+            Intent i = new Intent(context, GameSettingActivity.class);
             context.startActivity(i);
 
         });

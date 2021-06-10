@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.selection.player.TeammateSelection">
+    tools:context=".ui.home.game_settings.CountMethods">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toTopOf="@id/rvCountMethods"
         app:layout_constraintEnd_toStartOf="@id/rvCountMethods"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +21,8 @@
             android:id="@+id/svSearch"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/list_background_rounded"
@@ -69,17 +67,15 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/btnContinue"
+        android:id="@+id/btnContinue3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@drawable/list_background_rounded"
+        android:elevation="4dp"
+        android:queryBackground="@color/transparent"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rvCountMethods"
-        app:layout_constraintStart_toStartOf="@+id/rvCountMethods"
-        android:elevation="4dp"
-        android:queryBackground="@color/transparent"
-        />
-
+        app:layout_constraintStart_toStartOf="@+id/rvCountMethods" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,14 @@
-package project.bestscore.ui.parcours;
+package project.bestscore.ui.parcours_old;
 
-public class Parcour {
+public class Parcour2_old {
     private String parcourName;
-    private int id = -1; //Brauche ich um zu schauen ob Teammate schon in der Datenbank ist
+    private int id = -1;
 
-    public Parcour(String parcourName) {
+    public Parcour2_old(String parcourName) {
         this.parcourName = parcourName ;
     }
 
-    public Parcour(String parcourName, int id) {
+    public Parcour2_old(String parcourName, int id) {
         this.parcourName = parcourName ;
         this.id = id;
     }

@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.selection.parcour;
+package project.bestscore.ui.home.selection.countmethod;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,29 +8,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.bestscore.R;
-import project.bestscore.ui.home.selection.player.TeammateSelection;
+import project.bestscore.ui.home.selection.parcour.Parcour;
 
-public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
+public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
     private TextView tvNameOfParcour;
-    private ParcourSelectionAdapter adapter;
+    private CountMethodSelectionAdapter adapter;
     private final GestureDetectorCompat mGestureDetector;
-    private ConstraintLayout clBackground;
-    private ParcourSelection parcourSelection;
     private static final String TAG = "MyApp";
 
-    private boolean selected;
 
-
-    public ParcourSelectionHolder(@NonNull View itemView, Context context, ParcourSelectionAdapter adapter, TextView tvNameOfPlayer) {
+    public CountMethodSelectionHolder(@NonNull View itemView, Context context, CountMethodSelectionAdapter adapter, TextView tvNameOfPlayer) {
         super(itemView);
         this.tvNameOfParcour = tvNameOfPlayer;
         this.adapter = adapter;
-        selected = true;
 
         MyGestureListener mgl = new MyGestureListener();
         mGestureDetector = new GestureDetectorCompat(context, mgl);
@@ -49,15 +42,7 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
 
     @Override
     public void onClick(View v) {
-        if(selected){
-            selected = false;
-            parcourSelection.
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
-        }else{
-            selected = true;
-            teammateSelection.deleteSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded);
-        }
+        System.out.println("Hier passiert nichts");
     }
 
     private class MyGestureListener

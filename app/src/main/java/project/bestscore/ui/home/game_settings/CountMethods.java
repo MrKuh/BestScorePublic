@@ -15,9 +15,7 @@ public class CountMethods extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_count_methods);
-
-        tvCustom = findViewById(R.id.tvCustom);
+        setContentView(R.layout.activity_countmethod_selection);
 
         tvCustom.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

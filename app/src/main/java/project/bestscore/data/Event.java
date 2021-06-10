@@ -5,31 +5,34 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+import project.bestscore.ui.home.selection.parcour.Parcour;
+
 public class Event {
 
     private String name;
     private String type;
-    private String parkour;
+    private Parcour parcour;
     private LocalDateTime date;
     private ArrayList<Teammate> teammateList;
     private ArrayList<Target> targetList;
-    private int id;////////////////////////
-    
-    public Event(String name, String type, String parkour, LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList) {
+    private int id;
+
+    public Event(String name, String type, Parcour parcour, LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList) {
         this.name = name;
         this.type = type;
         this.date = date;
-        this.parkour = parkour;
+        this.parcour = parcour;
         this.teammateList = teammateList;
         this.targetList = targetList;
     }
 
-    public Event(String name, String type, LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList, int id) {
+    public Event(String name, String type, Parcour parcour ,LocalDateTime date, ArrayList<Teammate> teammateList, ArrayList<Target> targetList, int id) {
         this.name = name;
         this.type = type;
         this.date = date;
         this.teammateList = teammateList;
         this.targetList = targetList;
+        this.parcour = parcour;
         this.id = id;
     }
 
@@ -53,8 +56,8 @@ public class Event {
         return targetList;
     }
 
-    public String getParkour(){
-        return parkour;
+    public Parcour getParcour(){
+        return parcour;
     }
 
     public int getId(){return id;}
