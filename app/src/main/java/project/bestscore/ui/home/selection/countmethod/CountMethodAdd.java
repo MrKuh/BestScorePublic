@@ -7,29 +7,48 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import project.bestscore.R;
 
-public class CountMethodAdd extends AppCompatActivity {
+import static project.bestscore.ui.home.game_settings.GameSettingActivity.AMOUNT_ARROWS;
 
-    private EditText edNameOfNewPlayer;
-    private EditText edWinsOfNewPlayer;
-    private ImageButton btnAddPlayer;
+public class CountMethodAdd extends AppCompatActivity {
+    private EditText edNameOfNewCountMethod;
+    private ArrayList<String[]> zones;
+    private ImageButton btnAddCountMethod;
+    private RecyclerView rvCounts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_countmethod_selection);
+        setContentView(R.layout.actvity_countmethod_add);
 
-        edNameOfNewPlayer = findViewById(R.id.edNameOfNewPlayer);
-        edWinsOfNewPlayer = findViewById(R.id.edWinsOfNewPlayer);
-        btnAddPlayer = findViewById(R.id.btnAddPlayer);
-        btnAddPlayer.setEnabled(false);
+        edNameOfNewCountMethod = findViewById(R.id.edNameOfCountMethod);
 
-        edNameOfNewPlayer.addTextChangedListener(new TextWatcher() {
+        zones = new ArrayList<>();
+        for (int i = 1; i < AMOUNT_ARROWS + 1; i++) {
+            String[] zone = new String[5];
+            zone[0] = (getString(R.string.settings_arrow) + ": " + i);
+            System.out.println(zone[0]);
+            zones.add(zone);
+        }
+        rvCounts = this.findViewById(R.id.rvCountMethodsAdd);
+        rvCounts.setNestedScrollingEnabled(false);
+        rvCounts.setHasFixedSize(true);
+        rvCounts.setLayoutManager(new LinearLayoutManager(this));
+        rvCounts.setAdapter(new CountAdapter(zones));
+
+
+        btnAddCountMethod = findViewById(R.id.btnAddCountMethod);
+        btnAddCountMethod.setEnabled(false);
+
+        edNameOfNewCountMethod.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -42,33 +61,22 @@ public class CountMethodAdd extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!edNameOfNewPlayer.getText().toString().isEmpty()){
-                    btnAddPlayer.setEnabled(true);
+                if(!edNameOfNewCountMethod.getText().toString().isEmpty()){
+                    btnAddCountMethod.setEnabled(true);
                 }else{
-                    btnAddPlayer.setEnabled(false);
+                    btnAddCountMethod.setEnabled(false);
                 }
             }
         });
 
-        btnAddPlayer.setOnClickListener(new View.OnClickListener() {
+        btnAddCountMethod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
-                intent.putExtra("name", edNameOfNewPlayer.getText().toString());
-                int wins;
-                if(edWinsOfNewPlayer.getText().toString().isEmpty()){
-                    wins = 0;
-                }else{
-                    try {
-                        wins = Integer.parseInt(edWinsOfNewPlayer.getText().toString());
-                    }catch (NumberFormatException e){
-                        Toast.makeText(CountMethodAdd.this, "Exception caught, wins = 0", Toast.LENGTH_SHORT).show();
-                        wins = 0;
-                    }
-                }
-                intent.putExtra("wins", wins);
+                intent.putExtra("name", edNameOfNewCountMethod.getText().toString());
+                System.out.println(edNameOfNewCountMethod.getText().toString());
 
-                setResult(20, intent);
+                setResult(23, intent);
                 finish();
             }
         });

@@ -36,7 +36,7 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
         this.clBackground = clBackground;
         this.parcourSelection = parcourSelection;
         this.adapter = adapter;
-        selected = true;
+        selected = false;
 
         project.bestscore.ui.home.selection.parcour.ParcourSelectionHolder.MyGestureListener mgl = new project.bestscore.ui.home.selection.parcour.ParcourSelectionHolder.MyGestureListener();
         mGestureDetector = new GestureDetectorCompat(context, mgl);
@@ -55,12 +55,12 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
 
     @Override
     public void onClick(View v) {
-        if(selected){
-            selected = false;
+        if(!selected && parcourSelection.getParcourSelected().size() < 1){
+            selected = true;
             parcourSelection.addSelectedParcour(adapter.getParcourList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
         }else{
-            selected = true;
+            selected = false;
             parcourSelection.deleteSelectedParcour(adapter.getParcourList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded);
         }
@@ -69,7 +69,7 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
     private class MyGestureListener
             extends GestureDetector.SimpleOnGestureListener {
         // Minimal and Maximal swipe distance.
-        private final int MIN_DIST = 100;
+        private final int MIN_DIST = 70;
         private final int MAX_DIST = 1000;
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2,

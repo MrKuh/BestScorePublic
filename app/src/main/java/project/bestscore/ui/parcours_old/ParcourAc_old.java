@@ -26,7 +26,7 @@ public class ParcourAc_old extends AppCompatActivity {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.activity_parcour_item, container, false);
         //final TextView textView = root.findViewById(R.id.text_teammates);
-        rvParcour = root.findViewById(R.id.rvParcours);
+        rvParcour = root.findViewById(R.id.rvCountMethods);
         btnAdd = root.findViewById(R.id.btnAdd);
         svSearch = root.findViewById(R.id.svSearch);
 

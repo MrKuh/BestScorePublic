@@ -28,7 +28,7 @@ public class TeammatesFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_teammates, container, false);
         //final TextView textView = root.findViewById(R.id.text_teammates);
-        rvPlayers = root.findViewById(R.id.rvParcours);
+        rvPlayers = root.findViewById(R.id.rvCountMethods);
         btnAdd = root.findViewById(R.id.btnAdd);
         svSearch = root.findViewById(R.id.svSearch);
 

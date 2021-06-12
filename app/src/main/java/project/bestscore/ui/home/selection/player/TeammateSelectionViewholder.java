@@ -70,7 +70,7 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
     private class MyGestureListener
             extends GestureDetector.SimpleOnGestureListener {
         // Minimal and Maximal swipe distance.
-        private final int MIN_DIST = 100;
+        private final int MIN_DIST = 70;
         private final int MAX_DIST = 1000;
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2,

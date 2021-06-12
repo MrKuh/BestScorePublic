@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.selection.countmethod;
+package project.bestscore.ui.home.selection.countmethod.old;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,39 +14,48 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import project.bestscore.R;
-import project.bestscore.data.CountMethod;
-import project.bestscore.ui.home.game_settings.GameSettingActivity;
+import project.bestscore.ui.home.selection.countmethod.CountAdapter;
 
-public class CountMethodSelection extends AppCompatActivity {
+public class CountMethodSelection_old extends AppCompatActivity {
 
-    private RecyclerView rvCountMethod;
-    private CountMethodSelectionAdapter adapter;
+    private Context context;
+
+
+    private RecyclerView rvCountmethods;
+    private CountMethodSelectionAdapter_old adapter;
     private ImageButton btnAdd;
     private SearchView svSearch;
-    private Context context;
     private Button btnContinue;
-    private List<CountMethod> countMethodSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countmethod_selection);
 
-        countMethodSelected = new ArrayList<>();
-
-        rvCountMethod = findViewById(R.id.rvCountMethods);
-        btnAdd = findViewById(R.id.btnAdd);
-        svSearch = findViewById(R.id.svSearch);
         context = this;
         btnContinue = findViewById(R.id.btnContinue);
 
-        rvCountMethod.setHasFixedSize(true);
-        rvCountMethod.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CountMethodSelectionAdapter(this,this,this);
-        rvCountMethod.setAdapter(adapter);
+        rvCountmethods = findViewById(R.id.rvCountMethodsAdd);
+        btnAdd = findViewById(R.id.btnAdd);
+        svSearch = findViewById(R.id.svSearch);
+
+        ArrayList<String[]> zones = new ArrayList<>();
+        for (int i = 1; i < 5; i++) {
+            String[] zone = new String[5];
+            zone[0] = (getString(R.string.settings_arrow) + ": " + i);
+            System.out.println(zone[0]);
+            zones.add(zone);
+        }
+
+        rvCountmethods = this.findViewById(R.id.rvCountMethodsAdd);
+        rvCountmethods.setNestedScrollingEnabled(false);
+        rvCountmethods.setHasFixedSize(true);
+        rvCountmethods.setLayoutManager(new LinearLayoutManager(this));
+        rvCountmethods.setAdapter(new CountAdapter(zones));
+
+
 
 
         svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -66,20 +75,21 @@ public class CountMethodSelection extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CountMethodAdd.class);
-                startActivityForResult(intent, 103);
+                Intent intent = new Intent(context, CountMethodAdd_old.class);
+                startActivityForResult(intent, 300);
+
             }
         });
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
-                if(!countMethodSelected.isEmpty()){
-                    intent.putExtra("name", countMethodSelected.get(0).getCountMethodName());
-                }
-                setResult(GameSettingActivity.REQ_CODE_COUNTMETHOD, intent);
+                String data = "test";
+                Intent intent = new Intent();
+                intent.putExtra("SELECTED_METHOD", data);
+                setResult(RESULT_OK, intent);
                 finish();
+
             }
         });
     }
@@ -88,22 +98,8 @@ public class CountMethodSelection extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 103 && resultCode == 23){
+        if(requestCode == 300 && resultCode == 20){
             String name = data.getStringExtra("name");
-            CountMethod newCountMethod = new CountMethod(name);
-            adapter.newCountMethod(newCountMethod);
         }
-    }
-
-    public List<CountMethod> getCountMethodSelected() {
-        return countMethodSelected;
-    }
-
-    public void addSelectedParcour(CountMethod countMethod){
-        countMethodSelected.add(countMethod);
-    }
-
-    public void deleteSelectedParcour(CountMethod countMethod){
-        countMethodSelected.remove(countMethod);
     }
 }

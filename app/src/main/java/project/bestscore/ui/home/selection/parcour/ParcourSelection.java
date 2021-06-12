@@ -18,10 +18,7 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.Parcour;
-import project.bestscore.data.Teammate;
 import project.bestscore.ui.home.game_settings.GameSettingActivity;
-import project.bestscore.ui.home.selection.player.TeammateSelectionAdapter;
-import project.bestscore.ui.teammates.TeammateAdd;
 
 public class ParcourSelection extends AppCompatActivity {
 
@@ -40,7 +37,7 @@ public class ParcourSelection extends AppCompatActivity {
 
         parcourSelected = new ArrayList<>();
 
-        rvParcour = findViewById(R.id.rvParcours);
+        rvParcour = findViewById(R.id.rvCountMethods);
         btnAdd = findViewById(R.id.btnAdd);
         svSearch = findViewById(R.id.svSearch);
         context = this;
@@ -78,14 +75,10 @@ public class ParcourSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
-                intent.putExtra("amount", parcourSelected.size());
+                if(!parcourSelected.isEmpty()){
+                    intent.putExtra("name", parcourSelected.get(0).getParcourName());
+                }
                 setResult(GameSettingActivity.REQ_CODE_PARCOUR, intent);
-                /*
-                Bundle args = new Bundle();
-                args.putSerializable("selectedMates", (Serializable) teammatesSelected);
-                intent.putExtra("bundle",args);
-                setResult(GameSettingActivity.REQ_CODE_TEAMMATE, intent);
-                 */
                 finish();
             }
         });
@@ -100,6 +93,10 @@ public class ParcourSelection extends AppCompatActivity {
             Parcour newParcour = new Parcour(name);
             adapter.newParcour(newParcour);
         }
+    }
+
+    public List<Parcour> getParcourSelected() {
+        return parcourSelected;
     }
 
     public void addSelectedParcour(Parcour parcour){

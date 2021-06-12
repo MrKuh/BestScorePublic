@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.selection.countmethod;
+package project.bestscore.ui.home.selection.countmethod.old;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,31 +8,22 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.bestscore.R;
-import project.bestscore.data.CountMethod;
 import project.bestscore.data.Parcour;
 
-public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
-    private TextView tvNameOfCountMethod;
-    private ConstraintLayout clBackground;
-    private CountMethodSelection countMethodSelection;
-    private CountMethodSelectionAdapter adapter;
-    private boolean selected;
+public class CountMethodSelectionHolder_old extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
+    private TextView tvNameOfParcour;
+    private CountMethodSelectionAdapter_old adapter;
     private final GestureDetectorCompat mGestureDetector;
     private static final String TAG = "MyApp";
 
 
-    public CountMethodSelectionHolder(@NonNull View itemView, Context context, CountMethodSelectionAdapter adapter, TextView tvNameOfCountMethod, ConstraintLayout clBackground, CountMethodSelection countMethodSelection) {
+    public CountMethodSelectionHolder_old(@NonNull View itemView, Context context, CountMethodSelectionAdapter_old adapter, TextView tvNameOfPlayer) {
         super(itemView);
-        this.tvNameOfCountMethod = tvNameOfCountMethod;
-        this.clBackground = clBackground;
-        this.countMethodSelection = countMethodSelection;
+        this.tvNameOfParcour = tvNameOfPlayer;
         this.adapter = adapter;
-        selected = false;
 
         MyGestureListener mgl = new MyGestureListener();
         mGestureDetector = new GestureDetectorCompat(context, mgl);
@@ -40,8 +31,8 @@ public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implemen
         itemView.setOnClickListener(this);
     }
 
-    public TextView getTvNameOfCountMethod() {
-        return tvNameOfCountMethod;
+    public TextView getTvNameOfParcour() {
+        return tvNameOfParcour;
     }
 
     @Override
@@ -51,21 +42,13 @@ public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implemen
 
     @Override
     public void onClick(View v) {
-        if(!selected && countMethodSelection.getCountMethodSelected().size() < 1){
-            selected = true;
-            countMethodSelection.addSelectedParcour(adapter.getCountMethodList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
-        }else{
-            selected = false;
-            countMethodSelection.deleteSelectedParcour(adapter.getCountMethodList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded);
-        }
+        System.out.println("Hier passiert nichts");
     }
 
     private class MyGestureListener
             extends GestureDetector.SimpleOnGestureListener {
         // Minimal and Maximal swipe distance.
-        private final int MIN_DIST = 70;
+        private final int MIN_DIST = 100;
         private final int MAX_DIST = 1000;
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2,
@@ -79,8 +62,8 @@ public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implemen
                     Log.i(TAG, "swipe left");
                 } else {
                     Log.i(TAG, "swipe right");
-                    CountMethod countMethod = adapter.getCountMethodList().get(getAdapterPosition());
-                    adapter.getDatabaseHelper().deleteCountMethod(countMethod);
+                    Parcour parcour = adapter.getParcourList().get(getAdapterPosition());
+                    //adapter.getDatabaseHelper().deleteParcour(parcour);
                     adapter.updateList();
                     adapter.notifyDataSetChanged();
                 }
@@ -96,4 +79,3 @@ public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implemen
         }
     }
 }
-

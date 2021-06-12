@@ -10,6 +10,7 @@
     <string name="settings_count_method">Zählweise:</string>
     <string name="settings_zone1">Zone 1:</string>
     <string name="settings_select">SELECT</string>
+    <string name="settings_settings">Game Settings:</string>
     <string name="settings_event_name_value">Event #1</string>
     <string name="settings_start">START</string>
     <string name="settings_arrow">Arrow</string>
@@ -17,6 +18,7 @@
     <string name="settings_parcour_hint">Name</string>
     <string name="settings_teammate_add">Teammate hinzufügen:</string>
     <string name="settings_countmethod_add">Countmethod hinzufügen:</string>
+    <string name="settings_countmethod">CountMethod</string>
     <string name="settings_wins_add">Wins:</string>
     <string name="settings_name_add">Name:</string>
 

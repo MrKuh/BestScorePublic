@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import project.bestscore.R;
+import project.bestscore.data.DatabaseHelper;
 import project.bestscore.ui.home.selection.countmethod.CountMethodSelection;
 import project.bestscore.ui.home.selection.parcour.ParcourSelection;
 import project.bestscore.ui.home.selection.player.TeammateSelection;
@@ -23,11 +24,13 @@ public class GameSettingActivity extends AppCompatActivity {
     final static public int REQ_CODE_TEAMMATE = 12;
     final static public int REQ_CODE_COUNTMETHOD = 13;
 
-    private RecyclerView rvCounts;
+    final static public int AMOUNT_ARROWS = 4;
 
     private TextView tvParcour;
     private TextView tvTeammate;
     private TextView tvCountMethod;
+
+    private Boolean countMethodSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +62,6 @@ public class GameSettingActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQ_CODE_COUNTMETHOD);
             }
         });
-
-
-        ArrayList<String[]> zones = new ArrayList<>();
-        for (int i = 1; i < 5; i++) {
-            String[] zone = new String[5];
-            zone[0] = (getString(R.string.settings_arrow) + ": " + i);
-            System.out.println(zone[0]);
-            zones.add(zone);
-        }
-
-        rvCounts = this.findViewById(R.id.rvCountmethods);
-        rvCounts.setNestedScrollingEnabled(false);
-        rvCounts.setHasFixedSize(true);
-        rvCounts.setLayoutManager(new LinearLayoutManager(this));
-        rvCounts.setAdapter(new CountAdapter(zones));
     }
 
     @Override
@@ -81,23 +69,37 @@ public class GameSettingActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("RESULT");
 
-        if(resultCode == REQ_CODE_COUNTMETHOD){
-            System.out.println("test");
+        if(resultCode == REQ_CODE_PARCOUR) {
+            String name = data.getStringExtra("name");
+            if(name == null){
+                name = getString(R.string.settings_select);
+            }
+            tvParcour.setText(name);
+
         }
 
         if(resultCode == REQ_CODE_TEAMMATE){
             int amount = data.getIntExtra("amount", -1);
+            ArrayList<String> names = data.getStringArrayListExtra("names");
             tvTeammate.setText(amount + "");
-            /*
-            Bundle args = data.getBundleExtra("bundle");
-            ArrayList<Teammate> teammates = (ArrayList<Teammate>) args.getSerializable("selectedMates");
-            System.out.println(teammates.size());
-             */
+
         }
-        if(resultCode == REQ_CODE_PARCOUR) {
-            int amount = data.getIntExtra("amount", -1);
-            tvParcour.setText(amount + "");
+
+        if(resultCode == REQ_CODE_COUNTMETHOD){
+            String name = data.getStringExtra("name");
+            if(name == null){
+                name = getString(R.string.settings_select);
+                countMethodSelected = false;
+            }else{
+                countMethodSelected = true;
+
+            }
+            tvCountMethod.setText(name);
+
         }
+
+
+
     }
 
 }

@@ -38,7 +38,7 @@ public class TeammateSelection extends AppCompatActivity {
 
         teammatesSelected = new ArrayList<>();
 
-        rvPlayers = findViewById(R.id.rvParcours);
+        rvPlayers = findViewById(R.id.rvCountMethods);
         btnAdd = findViewById(R.id.btnAdd);
         svSearch = findViewById(R.id.svSearch);
         context = this;
@@ -46,7 +46,7 @@ public class TeammateSelection extends AppCompatActivity {
 
         rvPlayers.setHasFixedSize(true);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TeammateSelectionAdapter(this,this,this);
+        adapter = new TeammateSelectionAdapter(this, this, this);
         rvPlayers.setAdapter(adapter);
 
 
@@ -63,7 +63,7 @@ public class TeammateSelection extends AppCompatActivity {
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener(){
+        btnAdd.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -76,6 +76,12 @@ public class TeammateSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
+                ArrayList<String> names = new ArrayList<String>();
+                for (Teammate teammate : teammatesSelected) {
+                    names.add(teammate.getName());
+                }
+
+                intent.putExtra("names", names);
                 intent.putExtra("amount", teammatesSelected.size());
 
                 setResult(GameSettingActivity.REQ_CODE_TEAMMATE, intent);
@@ -95,7 +101,7 @@ public class TeammateSelection extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 100 && resultCode == 20){
+        if (requestCode == 100 && resultCode == 20) {
             String name = data.getStringExtra("name");
             int wins = data.getIntExtra("wins", 0);
             Teammate newTeammate = new Teammate(name, wins);
@@ -103,11 +109,11 @@ public class TeammateSelection extends AppCompatActivity {
         }
     }
 
-    public void addSelectedTeammate(Teammate teammate){
+    public void addSelectedTeammate(Teammate teammate) {
         teammatesSelected.add(teammate);
     }
 
-    public void deleteSelectedTeammate(Teammate teammate){
+    public void deleteSelectedTeammate(Teammate teammate) {
         teammatesSelected.remove(teammate);
     }
 }

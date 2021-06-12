@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.game_settings;
+package project.bestscore.ui.home.selection.countmethod;
 
 import android.view.LayoutInflater;
 import android.view.View;

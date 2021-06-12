@@ -25,6 +25,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PARCOUR_ID = "parcour_id";
     private static final String PARCOUR_NAME = "parcour_name";
 
+    private static final String COUNTMETHOD = "countmethod";
+    private static final String COUNTMETHOD_ID = "countmethod_id";
+    private static final String COUNTMETHOD_NAME = "countmethod_name";
+
     private static final String EVENT = "Event";
     private static final String EVENT_ID = "event_id";
     private static final String EVENT_NAME = "event_name";
@@ -33,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TARGET = "Target";
     private static final String TARGET_ID = "target_id";
-    private static final String TARGET_NAME = "target_id";
+    private static final String TARGET_NAME = "target_Name";
 
     private static final String TEAMMATE_EVENT = "TeammateEvent";
     private static final String TEAMMATE_EVENT_TARGET = "TeammateEventTarget";
@@ -60,6 +64,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String parcour = "CREATE TABLE " + PARCOUR +
                 "(" + PARCOUR_ID + " INTEGER PRIMARY KEY," + PARCOUR_NAME + " TEXT NOT NULL UNIQUE)";
 
+        String countmethod = "CREATE TABLE " + COUNTMETHOD +
+                "(" + COUNTMETHOD_ID + " INTEGER PRIMARY KEY," + COUNTMETHOD_NAME + " TEXT NOT NULL UNIQUE)";
+
         String teammate_event = "CREATE TABLE " + TEAMMATE_EVENT +
                 "(" + TEAMMATE_ID + " INTEGER, " + EVENT_ID + " INTEGER," +
                 "PRIMARY KEY (" + TEAMMATE_ID + "," + EVENT_ID + ")," +
@@ -77,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(event);
         db.execSQL(target);
         db.execSQL(parcour);
+        db.execSQL(countmethod);
         db.execSQL(teammate_event);
         db.execSQL(teammate_event_target);
 
@@ -86,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TEAMMATE);
         db.execSQL("DROP TABLE IF EXISTS " + PARCOUR);
+        db.execSQL("DROP TABLE IF EXISTS " + COUNTMETHOD);
         db.execSQL("DROP TABLE IF EXISTS " + EVENT);
         db.execSQL("DROP TABLE IF EXISTS " + TARGET);
         db.execSQL("DROP TABLE IF EXISTS " + TEAMMATE_EVENT);
@@ -274,6 +283,94 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertCountMethod(@NotNull CountMethod countMethod) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues countMethod_values = new ContentValues();
+        countMethod_values.put(COUNTMETHOD_NAME, countMethod.getCountMethodName());
+
+        long result = sqLiteDatabase.insert(COUNTMETHOD, null, countMethod_values);
+
+        if (result == -1) {
+            return false;
+        }
+        countMethod.setId(getCountMethodID(countMethod.getCountMethodName()));
+
+        return true;
+    }
+
+    public boolean countMethodInserted(CountMethod countMethod){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + COUNTMETHOD, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String countmethod_name = cursor.getString(cursor.getColumnIndex(COUNTMETHOD_NAME));
+            int countmethod_id = cursor.getInt(cursor.getColumnIndex(COUNTMETHOD_ID));
+
+            if(countmethod_id == countMethod.getId() || countmethod_name.equals(countMethod.getCountMethodName())){
+                return true;
+            }
+
+            cursor.moveToNext();
+        }
+
+        return false;
+    }
+
+    public ArrayList<CountMethod> getCountMethods() {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        ArrayList<CountMethod> countMethodsList = new ArrayList<>();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + COUNTMETHOD, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            String countmethod_name = cursor.getString(cursor.getColumnIndex(COUNTMETHOD_NAME));
+            int countmethod_id = cursor.getInt(cursor.getColumnIndex(COUNTMETHOD_ID));
+            countMethodsList.add(new CountMethod(countmethod_name, countmethod_id));
+            cursor.moveToNext();
+        }
+        return countMethodsList;
+    }
+
+    public int getCountMethodID(String countMethodName){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT " +  COUNTMETHOD_ID + " FROM " + COUNTMETHOD + " WHERE " + COUNTMETHOD_NAME +  " = \""
+                + countMethodName + "\"", null);
+
+        cursor.moveToFirst();
+
+        return cursor.getInt(cursor.getColumnIndex(COUNTMETHOD_ID));
+    }
+
+    public boolean updateCountMethod(@NotNull CountMethod countMethod){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COUNTMETHOD_NAME, countMethod.getCountMethodName());
+
+        long result = db.update(COUNTMETHOD, cv, COUNTMETHOD_ID + "=?", new String[]{String.valueOf(countMethod.getId())});
+
+        if(result == -1){
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public boolean deleteCountMethod(@NotNull CountMethod countMethod){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long result = db.delete(COUNTMETHOD, COUNTMETHOD_ID + "=?", new String[]{String.valueOf(countMethod.getId())});
+
+        if(result == -1){
+            return false;
+        }
+
+        return true;
+    }
 
     public boolean insertEvent(@NotNull Event event) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
