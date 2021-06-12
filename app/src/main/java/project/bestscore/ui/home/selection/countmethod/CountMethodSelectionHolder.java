@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.bestscore.ui.home.selection.parcour.Parcour;
+import project.bestscore.data.Parcour;
 
 public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
     private TextView tvNameOfParcour;

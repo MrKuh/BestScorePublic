@@ -15,7 +15,7 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.DatabaseHelper;
-import project.bestscore.ui.home.selection.parcour.Parcour;
+import project.bestscore.data.Parcour;
 
 public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMethodSelectionHolder> {
     private Context context;
@@ -53,7 +53,7 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
     @Override
     public void onBindViewHolder(@NonNull CountMethodSelectionHolder holder, int position) {
         Parcour parcour = parcourList.get(position);
-        holder.getTvNameOfParcour().setText(parcour.getName());
+        holder.getTvNameOfParcour().setText(parcour.getParcourName());
     }
 
     @Override
@@ -76,8 +76,8 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
         }else{
             parcourList = new ArrayList<>();
             for (Parcour parcour:parcourListAll) {
-                if(parcour.getName().toLowerCase().contains(filter.toLowerCase())||
-                        parcour.getName().toLowerCase().contains(filter.toLowerCase())){
+                if(parcour.getParcourName().toLowerCase().contains(filter.toLowerCase())||
+                        parcour.getParcourName().toLowerCase().contains(filter.toLowerCase())){
                     parcourList.add(parcour);
                 }
             }
@@ -93,7 +93,7 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
     }
 
     public void updateList(){
-        parcourListAll = databaseHelper.getParcours();
+        //parcourListAll = databaseHelper.getParcours();
         ArrayList<Parcour> pacours = new ArrayList<Parcour>();
         pacours.add(new Parcour("TEST"));
         parcourListAll = pacours;

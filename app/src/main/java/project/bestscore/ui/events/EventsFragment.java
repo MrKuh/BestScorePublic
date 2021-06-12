@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import project.bestscore.R;
 import project.bestscore.data.Event;
-import project.bestscore.ui.home.selection.parcour.Parcour;
+import project.bestscore.data.Parcour;
 
 public class EventsFragment extends Fragment {
 

@@ -15,6 +15,7 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.DatabaseHelper;
+import project.bestscore.data.Parcour;
 
 public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelectionHolder> {
     private Context context;
@@ -51,7 +52,7 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
     @Override
     public void onBindViewHolder(@NonNull ParcourSelectionHolder holder, int position) {
         Parcour parcour = parcourList.get(position);
-        holder.getTvNameOfParcour().setText(parcour.getName());
+        holder.getTvNameOfParcour().setText(parcour.getParcourName());
     }
 
     @Override
@@ -74,8 +75,8 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
         }else{
             parcourList = new ArrayList<>();
             for (Parcour parcour:parcourListAll) {
-                if(parcour.getName().toLowerCase().contains(filter.toLowerCase())||
-                        parcour.getName().toLowerCase().contains(filter.toLowerCase())){
+                if(parcour.getParcourName().toLowerCase().contains(filter.toLowerCase())||
+                        parcour.getParcourName().toLowerCase().contains(filter.toLowerCase())){
                     parcourList.add(parcour);
                 }
             }

@@ -54,7 +54,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
 
         holder.getTvEventDate().setText(event.getDate().format(dateTimeFormatter));
         holder.getTvEventName().setText(event.getName());
-        holder.getTvEventParkour().setText(event.getParcour().getName());
+        holder.getTvEventParkour().setText(event.getParcour().getParcourName());
 
     }
 

@@ -1,4 +1,4 @@
-package project.bestscore.ui.home.selection.parcour;
+package project.bestscore.data;
 
 public class Parcour {
 
@@ -18,7 +18,7 @@ public class Parcour {
         return id;
     }
 
-    public String getName() {
+    public String getParcourName() {
         return name;
     }
 

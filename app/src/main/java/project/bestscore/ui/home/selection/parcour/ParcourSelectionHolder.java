@@ -12,7 +12,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import project.bestscore.R;
+import project.bestscore.data.Parcour;
+import project.bestscore.data.Teammate;
 import project.bestscore.ui.home.selection.player.TeammateSelection;
 
 public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
@@ -22,6 +26,8 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
     private ConstraintLayout clBackground;
     private ParcourSelection parcourSelection;
     private static final String TAG = "MyApp";
+
+    private ArrayList<Teammate> teammatesSelected = new ArrayList<Teammate>();
 
     private boolean selected;
 
@@ -51,11 +57,10 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
     public void onClick(View v) {
         if(selected){
             selected = false;
-            parcourSelection.
             clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
         }else{
             selected = true;
-            teammateSelection.deleteSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
+            //teammateSelection.deleteSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded);
         }
     }

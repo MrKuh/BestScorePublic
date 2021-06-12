@@ -14,13 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.ui.home.game_settings.CountAdapter;
-import project.bestscore.ui.home.game_settings.GameSettingActivity;
-import project.bestscore.ui.home.selection.parcour.Parcour;
-import project.bestscore.ui.home.selection.parcour.ParcourAdd;
 
 public class CountMethodSelection extends AppCompatActivity {
 

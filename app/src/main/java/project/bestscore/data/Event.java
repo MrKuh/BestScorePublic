@@ -1,11 +1,7 @@
 package project.bestscore.data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-
-import project.bestscore.ui.home.selection.parcour.Parcour;
 
 public class Event {
 

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import project.bestscore.R;
+import project.bestscore.data.Parcour;
 import project.bestscore.data.Teammate;
 import project.bestscore.ui.home.game_settings.GameSettingActivity;
 
@@ -28,6 +29,10 @@ public class ParcourSelection extends AppCompatActivity {
     private RecyclerView rvParcour;
     private ParcourSelectionAdapter adapter;
     private Context context;
+
+    private Parcour parcour = new Parcour(1, "TestP");
+
+    private ArrayList<Teammate> teammatesSelected = new ArrayList<Teammate>();
 
     private ImageButton btnAdd;
     private SearchView svSearch;
@@ -79,9 +84,10 @@ public class ParcourSelection extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Parcour parcour = new Parcour(1, "TestP");
                 System.out.println("TEST");
                 Intent intent = getIntent();
-                intent.putExtra("amount", parcour.getName());
+                intent.putExtra("amount", parcour.getParcourName());
                 setResult(GameSettingActivity.REQ_CODE_PARCOUR, intent);
                 finish();
             }
