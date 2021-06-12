@@ -44,7 +44,7 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
     @Override
     public CountMethodSelectionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_parkour_item,parent,false);
+                .inflate(R.layout.activity_parcour_item,parent,false);
         TextView tvNameOfCountMethod = view.findViewById(R.id.tvNameOfParcour);
         CountMethodSelectionHolder parkourHolder = new CountMethodSelectionHolder(view, context, this,tvNameOfCountMethod);
         return parkourHolder;

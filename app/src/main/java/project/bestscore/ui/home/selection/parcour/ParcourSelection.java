@@ -20,41 +20,35 @@ import project.bestscore.R;
 import project.bestscore.data.Parcour;
 import project.bestscore.data.Teammate;
 import project.bestscore.ui.home.game_settings.GameSettingActivity;
+import project.bestscore.ui.home.selection.player.TeammateSelectionAdapter;
+import project.bestscore.ui.teammates.TeammateAdd;
 
 public class ParcourSelection extends AppCompatActivity {
 
-
-    private List<Parcour> parcoursSelected;
-
     private RecyclerView rvParcour;
     private ParcourSelectionAdapter adapter;
-    private Context context;
-
-    private Parcour parcour = new Parcour(1, "TestP");
-
-    private ArrayList<Teammate> teammatesSelected = new ArrayList<Teammate>();
-
     private ImageButton btnAdd;
     private SearchView svSearch;
-
-
+    private Context context;
     private Button btnContinue;
+    private List<Parcour> parcourSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parcour_selection);
 
+        parcourSelected = new ArrayList<>();
+
+        rvParcour = findViewById(R.id.rvParcours);
+        btnAdd = findViewById(R.id.btnAdd);
+        svSearch = findViewById(R.id.svSearch);
         context = this;
         btnContinue = findViewById(R.id.btnContinue);
 
-        rvParcour = findViewById(R.id.rvCountMethods);
-        btnAdd = findViewById(R.id.btnAdd);
-        svSearch = findViewById(R.id.svSearch);
-
         rvParcour.setHasFixedSize(true);
         rvParcour.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ParcourSelectionAdapter(this,this);
+        adapter = new ParcourSelectionAdapter(this,this,this);
         rvParcour.setAdapter(adapter);
 
 
@@ -76,19 +70,22 @@ public class ParcourSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ParcourAdd.class);
-                startActivityForResult(intent, 200);
-
+                startActivityForResult(intent, 101);
             }
         });
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Parcour parcour = new Parcour(1, "TestP");
-                System.out.println("TEST");
                 Intent intent = getIntent();
-                intent.putExtra("amount", parcour.getParcourName());
+                intent.putExtra("amount", parcourSelected.size());
                 setResult(GameSettingActivity.REQ_CODE_PARCOUR, intent);
+                /*
+                Bundle args = new Bundle();
+                args.putSerializable("selectedMates", (Serializable) teammatesSelected);
+                intent.putExtra("bundle",args);
+                setResult(GameSettingActivity.REQ_CODE_TEAMMATE, intent);
+                 */
                 finish();
             }
         });
@@ -98,16 +95,18 @@ public class ParcourSelection extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 200 && resultCode == 20){
+        if(requestCode == 101 && resultCode == 21){
             String name = data.getStringExtra("name");
+            Parcour newParcour = new Parcour(name);
+            adapter.newParcour(newParcour);
         }
     }
 
-    public void addSelectedParcour(Teammate teammate){
-        teammatesSelected.add(teammate);
+    public void addSelectedParcour(Parcour parcour){
+        parcourSelected.add(parcour);
     }
 
-    public void deleteSelectedParcourbn (Teammate teammate){
-        teammatesSelected.remove(teammate);
+    public void deleteSelectedParcour(Parcour parcour){
+        parcourSelected.remove(parcour);
     }
 }

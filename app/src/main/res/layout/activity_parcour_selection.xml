@@ -14,8 +14,8 @@ tools:context=".ui.home.selection.parcour.ParcourSelection">
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="0dp"
-    app:layout_constraintBottom_toTopOf="@id/rvCountMethods"
-    app:layout_constraintEnd_toStartOf="@id/rvCountMethods"
+    app:layout_constraintBottom_toTopOf="@id/rvParcours"
+    app:layout_constraintEnd_toStartOf="@id/rvParcours"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -54,7 +54,7 @@ tools:context=".ui.home.selection.parcour.ParcourSelection">
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rvCountMethods"
+    android:id="@+id/rvParcours"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_marginStart="10dp"
@@ -76,8 +76,8 @@ tools:context=".ui.home.selection.parcour.ParcourSelection">
     android:background="@drawable/list_background_rounded"
     android:text="Continue"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="@+id/rvCountMethods"
-    app:layout_constraintStart_toStartOf="@+id/rvCountMethods"
+    app:layout_constraintEnd_toEndOf="@+id/rvParcours"
+    app:layout_constraintStart_toStartOf="@+id/rvParcours"
     android:elevation="4dp"
     android:queryBackground="@color/transparent"
     />

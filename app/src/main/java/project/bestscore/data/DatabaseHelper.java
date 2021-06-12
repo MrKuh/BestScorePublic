@@ -229,7 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             String parcour_name = cursor.getString(cursor.getColumnIndex(PARCOUR_NAME));
             int parcour_id = cursor.getInt(cursor.getColumnIndex(PARCOUR_ID));
-            parcourList.add(new Parcour(parcour_id, parcour_name));
+            parcourList.add(new Parcour(parcour_name, parcour_id));
             cursor.moveToNext();
         }
         return parcourList;
@@ -238,7 +238,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int getParcourID(String parcourName){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT " +  PARCOUR_ID + " FROM " + PARCOUR + " WHERE " + PARCOUR_NAME , null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT " +  PARCOUR_ID + " FROM " + PARCOUR + " WHERE " + PARCOUR_NAME +  " = \""
+                + parcourName + "\"", null);
 
         cursor.moveToFirst();
 
@@ -342,7 +343,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String event_type = eventCursor.getString(eventCursor.getColumnIndex(EVENT_TYPE));
 
             LocalDateTime event_date;
-            Parcour parcour = new Parcour(event_id, "testParcour");
+            Parcour parcour = new Parcour("testParcour", event_id);
             event_date = LocalDateTime.parse(eventCursor.getString(eventCursor.getColumnIndex(EVENT_DATE)), formatter);
 
             teammateCursor = sqLiteDatabase.rawQuery("SELECT * FROM " + TEAMMATE +

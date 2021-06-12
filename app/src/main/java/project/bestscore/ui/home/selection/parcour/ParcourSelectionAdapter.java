@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,23 +19,25 @@ import project.bestscore.data.DatabaseHelper;
 import project.bestscore.data.Parcour;
 
 public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelectionHolder> {
+
     private Context context;
     private Activity activity;
     private List<Parcour> parcourListAll;
     private List<Parcour> parcourList;
     private DatabaseHelper databaseHelper;
     private String filter = "";
+    private ParcourSelection parcourSelection;
 
-    public ParcourSelectionAdapter(Context context, Activity activity) {
+    public ParcourSelectionAdapter(Context context, Activity activity, ParcourSelection parcourSelection) {
         this.context = context;
         this.activity = activity;
-        /*
+        this.parcourSelection = parcourSelection;
         databaseHelper = new DatabaseHelper(context);
-        Parcour parcour = new Parcour("Hanslstadt");
+
+        Parcour parcour = new Parcour("Griasboch");
         if(!databaseHelper.parcourInserted(parcour)){
             databaseHelper.insertParcour(parcour);
         }
-         */
 
         updateList();
     }
@@ -43,10 +46,11 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
     @Override
     public ParcourSelectionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_parkour_item,parent,false);
+                .inflate(R.layout.activity_parcour_item,parent,false);
         TextView tvNameOfParcour = view.findViewById(R.id.tvNameOfParcour);
-        ParcourSelectionHolder parkourHolder = new ParcourSelectionHolder(view, context, this,tvNameOfParcour);
-        return parkourHolder;
+        ConstraintLayout clBackground = view.findViewById(R.id.clBackground);
+        ParcourSelectionHolder holder = new ParcourSelectionHolder(view, context, this, tvNameOfParcour, clBackground, parcourSelection);
+        return holder;
     }
 
     @Override
@@ -74,10 +78,10 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
             parcourList = new ArrayList<>(parcourListAll);
         }else{
             parcourList = new ArrayList<>();
-            for (Parcour parcour:parcourListAll) {
-                if(parcour.getParcourName().toLowerCase().contains(filter.toLowerCase())||
-                        parcour.getParcourName().toLowerCase().contains(filter.toLowerCase())){
-                    parcourList.add(parcour);
+            for (Parcour contact:parcourListAll) {
+                if(contact.getParcourName().toLowerCase().contains(filter.toLowerCase())||
+                        contact.getParcourName().toLowerCase().contains(filter.toLowerCase())){
+                    parcourList.add(contact);
                 }
             }
         }
@@ -87,15 +91,13 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
     public List<Parcour> getParcourList() {
         return parcourList;
     }
+
     public DatabaseHelper getDatabaseHelper() {
         return databaseHelper;
     }
 
     public void updateList(){
-        //parcourListAll = databaseHelper.getParcours();
-        ArrayList<Parcour> pacours = new ArrayList<Parcour>();
-        pacours.add(new Parcour("TEST"));
-        parcourListAll = pacours;
+        parcourListAll = databaseHelper.getParcours();
         filter(filter);
     }
 }

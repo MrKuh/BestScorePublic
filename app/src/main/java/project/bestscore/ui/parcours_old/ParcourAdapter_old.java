@@ -42,7 +42,7 @@ public class ParcourAdapter_old extends RecyclerView.Adapter<ParcourHolder_old> 
     @Override
     public ParcourHolder_old onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_parkour_item,parent,false);
+                .inflate(R.layout.activity_parcour_item,parent,false);
         TextView tvNameOfParcour = view.findViewById(R.id.tvNameOfParcour);
         ParcourHolder_old parkourHolder = new ParcourHolder_old(view, context, this,tvNameOfParcour);
         return parkourHolder;

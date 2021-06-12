@@ -1,6 +1,5 @@
 package project.bestscore.ui.home.selection.parcour;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,14 +7,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
-
 import project.bestscore.R;
-import project.bestscore.data.Teammate;
 
 public class ParcourAdd extends AppCompatActivity {
     private EditText edNameOfNewParcour;
@@ -27,7 +22,7 @@ public class ParcourAdd extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actvity_parcour_add);
 
-        edNameOfNewParcour = findViewById(R.id.tvNameOfCountMethod);
+        edNameOfNewParcour = findViewById(R.id.edNameOfParcour);
         btnAddParcour = findViewById(R.id.btnAddParcour);
         btnAddParcour.setEnabled(false);
 
@@ -57,8 +52,9 @@ public class ParcourAdd extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = getIntent();
                 intent.putExtra("name", edNameOfNewParcour.getText().toString());
+                System.out.println(edNameOfNewParcour.getText().toString());
 
-                setResult(20, intent);
+                setResult(21, intent);
                 finish();
             }
         });

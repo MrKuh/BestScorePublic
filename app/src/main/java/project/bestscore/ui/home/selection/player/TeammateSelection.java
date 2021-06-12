@@ -38,7 +38,7 @@ public class TeammateSelection extends AppCompatActivity {
 
         teammatesSelected = new ArrayList<>();
 
-        rvPlayers = findViewById(R.id.rvCountMethods);
+        rvPlayers = findViewById(R.id.rvParcours);
         btnAdd = findViewById(R.id.btnAdd);
         svSearch = findViewById(R.id.svSearch);
         context = this;

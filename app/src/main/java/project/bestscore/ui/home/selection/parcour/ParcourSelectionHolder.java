@@ -18,27 +18,27 @@ import project.bestscore.R;
 import project.bestscore.data.Parcour;
 import project.bestscore.data.Teammate;
 import project.bestscore.ui.home.selection.player.TeammateSelection;
+import project.bestscore.ui.home.selection.player.TeammateSelectionAdapter;
 
 public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
     private TextView tvNameOfParcour;
-    private ParcourSelectionAdapter adapter;
-    private final GestureDetectorCompat mGestureDetector;
     private ConstraintLayout clBackground;
     private ParcourSelection parcourSelection;
+    private ParcourSelectionAdapter adapter;
+    private boolean selected;
+    private final GestureDetectorCompat mGestureDetector;
     private static final String TAG = "MyApp";
 
-    private ArrayList<Teammate> teammatesSelected = new ArrayList<Teammate>();
 
-    private boolean selected;
-
-
-    public ParcourSelectionHolder(@NonNull View itemView, Context context, ParcourSelectionAdapter adapter, TextView tvNameOfPlayer) {
+    public ParcourSelectionHolder(@NonNull View itemView, Context context, ParcourSelectionAdapter adapter, TextView tvNameOfParcour, ConstraintLayout clBackground, ParcourSelection parcourSelection) {
         super(itemView);
-        this.tvNameOfParcour = tvNameOfPlayer;
+        this.tvNameOfParcour = tvNameOfParcour;
+        this.clBackground = clBackground;
+        this.parcourSelection = parcourSelection;
         this.adapter = adapter;
         selected = true;
 
-        MyGestureListener mgl = new MyGestureListener();
+        project.bestscore.ui.home.selection.parcour.ParcourSelectionHolder.MyGestureListener mgl = new project.bestscore.ui.home.selection.parcour.ParcourSelectionHolder.MyGestureListener();
         mGestureDetector = new GestureDetectorCompat(context, mgl);
         itemView.setOnTouchListener(this);
         itemView.setOnClickListener(this);
@@ -57,10 +57,11 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
     public void onClick(View v) {
         if(selected){
             selected = false;
+            parcourSelection.addSelectedParcour(adapter.getParcourList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
         }else{
             selected = true;
-            //teammateSelection.deleteSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
+            parcourSelection.deleteSelectedParcour(adapter.getParcourList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded);
         }
     }
@@ -83,7 +84,7 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
                 } else {
                     Log.i(TAG, "swipe right");
                     Parcour parcour = adapter.getParcourList().get(getAdapterPosition());
-                    //adapter.getDatabaseHelper().deleteParcour(parcour);
+                    adapter.getDatabaseHelper().deleteParcour(parcour);
                     adapter.updateList();
                     adapter.notifyDataSetChanged();
                 }
@@ -99,3 +100,4 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
         }
     }
 }
+

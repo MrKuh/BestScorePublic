@@ -21,7 +21,7 @@ public class ParcourAdd_old extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actvity_parcour_add);
 
-        edNameOfNewParcour = findViewById(R.id.tvNameOfCountMethod);
+        edNameOfNewParcour = findViewById(R.id.edNameOfParcour);
         btnAddParcour = findViewById(R.id.btnAddParcour);
         btnAddParcour.setEnabled(false);
 

@@ -88,17 +88,16 @@ public class GameSettingActivity extends AppCompatActivity {
         if(resultCode == REQ_CODE_TEAMMATE){
             int amount = data.getIntExtra("amount", -1);
             tvTeammate.setText(amount + "");
-
-
-
             /*
             Bundle args = data.getBundleExtra("bundle");
             ArrayList<Teammate> teammates = (ArrayList<Teammate>) args.getSerializable("selectedMates");
             System.out.println(teammates.size());
-
              */
-
-
+        }
+        if(resultCode == REQ_CODE_PARCOUR) {
+            int amount = data.getIntExtra("amount", -1);
+            tvParcour.setText(amount + "");
         }
     }
+
 }
