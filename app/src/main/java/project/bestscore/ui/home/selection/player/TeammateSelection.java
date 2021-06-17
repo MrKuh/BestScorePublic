@@ -18,7 +18,7 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.Teammate;
-import project.bestscore.ui.home.game_settings.GameSettingActivity;
+import project.bestscore.ui.home.game.GameSettingActivity;
 import project.bestscore.ui.teammates.TeammateAdd;
 
 public class TeammateSelection extends AppCompatActivity {

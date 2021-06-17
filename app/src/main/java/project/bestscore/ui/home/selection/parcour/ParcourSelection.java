@@ -18,7 +18,7 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.Parcour;
-import project.bestscore.ui.home.game_settings.GameSettingActivity;
+import project.bestscore.ui.home.game.GameSettingActivity;
 
 public class ParcourSelection extends AppCompatActivity {
 

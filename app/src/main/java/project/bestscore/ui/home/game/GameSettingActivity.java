@@ -1,9 +1,7 @@
-package project.bestscore.ui.home.game_settings;
+package project.bestscore.ui.home.game;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import project.bestscore.R;
-import project.bestscore.data.DatabaseHelper;
 import project.bestscore.ui.home.selection.countmethod.CountMethodSelection;
 import project.bestscore.ui.home.selection.parcour.ParcourSelection;
 import project.bestscore.ui.home.selection.player.TeammateSelection;
@@ -37,7 +34,7 @@ public class GameSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_setting);
 
-        tvParcour = findViewById(R.id.parkour_value);
+        tvParcour = findViewById(R.id.arrow21);
         tvTeammate = findViewById(R.id.teammates_value);
         tvCountMethod = findViewById(R.id.count_value);
 

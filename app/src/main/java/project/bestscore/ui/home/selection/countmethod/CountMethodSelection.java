@@ -18,7 +18,7 @@ import java.util.List;
 
 import project.bestscore.R;
 import project.bestscore.data.CountMethod;
-import project.bestscore.ui.home.game_settings.GameSettingActivity;
+import project.bestscore.ui.home.game.GameSettingActivity;
 
 public class CountMethodSelection extends AppCompatActivity {
 
@@ -42,6 +42,8 @@ public class CountMethodSelection extends AppCompatActivity {
         svSearch = findViewById(R.id.svSearch);
         context = this;
         btnContinue = findViewById(R.id.btnContinue);
+
+
 
         rvCountMethod.setHasFixedSize(true);
         rvCountMethod.setLayoutManager(new LinearLayoutManager(this));
@@ -95,15 +97,18 @@ public class CountMethodSelection extends AppCompatActivity {
         }
     }
 
-    public List<CountMethod> getCountMethodSelected() {
+    public CountMethod getCountMethodSelected() {
+        return countMethodSelected.get(0);
+    }
+    public List<CountMethod>  getCountMethodsSelected() {
         return countMethodSelected;
     }
 
-    public void addSelectedParcour(CountMethod countMethod){
+    public void addSelectedCountMethod(CountMethod countMethod){
         countMethodSelected.add(countMethod);
     }
 
-    public void deleteSelectedParcour(CountMethod countMethod){
+    public void deleteSelectedCountMethod(CountMethod countMethod){
         countMethodSelected.remove(countMethod);
     }
 }

@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BestScore">
+        <activity android:name=".ui.home.game.GameEventActivity"></activity>
         <activity android:name=".ui.home.selection.parcour.ParcourSelection" />
         <activity android:name=".ui.home.selection.countmethod.CountMethodAdd" />
         <activity android:name=".ui.home.selection.countmethod.CountMethodSelection" />
-        <activity android:name=".ui.home.game_settings.GameSettingActivity" />
+        <activity android:name=".ui.home.game.GameSettingActivity" />
         <activity android:name=".ui.teammates.TeammateAdd" />
         <activity android:name=".ui.parcours_old.ParcourAc_old" />
         <activity android:name=".ui.home.selection.player.TeammateSelection" />

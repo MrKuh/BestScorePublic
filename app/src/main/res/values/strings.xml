@@ -23,4 +23,11 @@
     <string name="settings_name_add">Name:</string>
 
 
+    <string name="game_header">Bogenschießen</string>
+    <string name="game_item_name">name</string>
+    <string name="game_item_arrow">A1</string>
+    <string name="game_back">zurück</string>
+    <string name="game_continue">vor</string>
+
+
 </resources>

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import project.bestscore.R;
 
-import static project.bestscore.ui.home.game_settings.GameSettingActivity.AMOUNT_ARROWS;
+import static project.bestscore.ui.home.game.GameSettingActivity.AMOUNT_ARROWS;
 
 public class CountMethodAdd extends AppCompatActivity {
     private EditText edNameOfNewCountMethod;

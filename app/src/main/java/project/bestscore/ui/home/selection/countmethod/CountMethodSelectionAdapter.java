@@ -29,6 +29,8 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
     private String filter = "";
     private CountMethodSelection countMethodSelection;
 
+    private CountMethodSelectionHolder holder;
+
     public CountMethodSelectionAdapter(Context context, Activity activity, CountMethodSelection countMethodSelection) {
         this.context = context;
         this.activity = activity;
@@ -50,7 +52,7 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
                 .inflate(R.layout.activity_countmethod_item,parent,false);
         TextView tvNameOfParcour = view.findViewById(R.id.tvNameOfCountMethod);
         ConstraintLayout clBackground = view.findViewById(R.id.clBackground);
-        CountMethodSelectionHolder holder = new CountMethodSelectionHolder(view, context, this, tvNameOfParcour, clBackground, countMethodSelection);
+        holder = new CountMethodSelectionHolder(view, context, this, tvNameOfParcour, clBackground, countMethodSelection);
         return holder;
     }
 

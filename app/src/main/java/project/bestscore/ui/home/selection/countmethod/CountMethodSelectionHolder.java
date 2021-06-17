@@ -51,13 +51,14 @@ public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implemen
 
     @Override
     public void onClick(View v) {
-        if(!selected && countMethodSelection.getCountMethodSelected().size() < 1){
+        if(!selected && countMethodSelection.getCountMethodsSelected().size() < 1){
             selected = true;
-            countMethodSelection.addSelectedParcour(adapter.getCountMethodList().get(getAdapterPosition()));
+            countMethodSelection.addSelectedCountMethod(adapter.getCountMethodList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
         }else{
             selected = false;
-            countMethodSelection.deleteSelectedParcour(adapter.getCountMethodList().get(getAdapterPosition()));
+            countMethodSelection.deleteSelectedCountMethod(countMethodSelection.getCountMethodSelected());
+            countMethodSelection.deleteSelectedCountMethod(adapter.getCountMethodList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded);
         }
     }
