@@ -38,7 +38,6 @@ public class GameSettingActivity extends AppCompatActivity {
         tvTeammate = findViewById(R.id.teammates_value);
         tvCountMethod = findViewById(R.id.count_value);
 
-
         tvParcour.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(GameSettingActivity.this, ParcourSelection.class);
@@ -79,7 +78,6 @@ public class GameSettingActivity extends AppCompatActivity {
             int amount = data.getIntExtra("amount", -1);
             ArrayList<String> names = data.getStringArrayListExtra("names");
             tvTeammate.setText(amount + "");
-
         }
 
         if(resultCode == REQ_CODE_COUNTMETHOD){

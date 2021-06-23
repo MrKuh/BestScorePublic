@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/playerName"
+            android:id="@+id/tvPlayerName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -52,7 +52,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/arrow42"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/playerName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPlayerName" />
 
         <TextView
             android:id="@+id/arrow42"
@@ -69,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/arrow43"
             app:layout_constraintStart_toEndOf="@id/arrow41"
-            app:layout_constraintTop_toBottomOf="@+id/playerName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPlayerName" />
 
         <TextView
             android:id="@+id/arrow43"
@@ -87,7 +87,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/arrow44"
             app:layout_constraintStart_toEndOf="@id/arrow42"
-            app:layout_constraintTop_toBottomOf="@+id/playerName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPlayerName" />
 
         <TextView
             android:id="@+id/arrow44"
@@ -105,7 +105,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/arrow43"
-            app:layout_constraintTop_toBottomOf="@+id/playerName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPlayerName" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

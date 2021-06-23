@@ -38,12 +38,12 @@ public class CountMethodAdd extends AppCompatActivity {
             System.out.println(zone[0]);
             zones.add(zone);
         }
+
         rvCounts = this.findViewById(R.id.rvCountMethodsAdd);
         rvCounts.setNestedScrollingEnabled(false);
         rvCounts.setHasFixedSize(true);
         rvCounts.setLayoutManager(new LinearLayoutManager(this));
         rvCounts.setAdapter(new CountAdapter(zones));
-
 
         btnAddCountMethod = findViewById(R.id.btnAddCountMethod);
         btnAddCountMethod.setEnabled(false);
