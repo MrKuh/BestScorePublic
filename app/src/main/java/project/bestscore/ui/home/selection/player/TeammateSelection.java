@@ -44,6 +44,7 @@ public class TeammateSelection extends AppCompatActivity {
         svSearch = findViewById(R.id.svSearch);
         context = this;
         btnContinue = findViewById(R.id.btnContinue);
+        btnContinue.setEnabled(false);
 
         rvPlayers.setHasFixedSize(true);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
@@ -130,10 +131,15 @@ public class TeammateSelection extends AppCompatActivity {
 
     public void addSelectedTeammate(Teammate teammate) {
         teammatesSelected.add(teammate);
+        btnContinue.setEnabled(true);
+
     }
 
     public void deleteSelectedTeammate(Teammate teammate) {
         teammatesSelected.remove(teammate);
+        if(teammatesSelected.size() == 0){
+            btnContinue.setEnabled(false);
+        }
 
     }
 }
