@@ -51,16 +51,34 @@ public class CountMethodSelectionHolder extends RecyclerView.ViewHolder implemen
 
     @Override
     public void onClick(View v) {
-        if(!selected && countMethodSelection.getCountMethodsSelected().size() < 1){
-            selected = true;
-            countMethodSelection.addSelectedCountMethod(adapter.getCountMethodList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
-        }else{
+        if(selected && countMethodSelection.getCountMethodSelected().equals(adapter.getCountMethodList().get(getAdapterPosition()))){
             selected = false;
-            countMethodSelection.deleteSelectedCountMethod(countMethodSelection.getCountMethodSelected());
-            countMethodSelection.deleteSelectedCountMethod(adapter.getCountMethodList().get(getAdapterPosition()));
+            countMethodSelection.deleteSelectedCountMethod();
+            countMethodSelection.setSelectionHolder(null);
             clBackground.setBackgroundResource(R.drawable.list_background_rounded);
+            countMethodSelection.setBtnContinue(false);
+        }else if(!selected && countMethodSelection.getCountMethodSelected()==null){
+            selected = true;
+            countMethodSelection.addSelectedCountMethod((adapter.getCountMethodList().get(getAdapterPosition())));
+            countMethodSelection.setSelectionHolder(this);
+            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
+            countMethodSelection.setBtnContinue(true);
+        }else {
+            selected = true;
+            countMethodSelection.addSelectedCountMethod((adapter.getCountMethodList().get(getAdapterPosition())));
+            countMethodSelection.changeColor();
+            countMethodSelection.setSelectionHolder(this);
+            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
+            countMethodSelection.setBtnContinue(true);
         }
+    }
+
+    public ConstraintLayout getClBackground() {
+        return clBackground;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     private class MyGestureListener

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,6 +28,10 @@ public class GameSettingActivity extends AppCompatActivity {
     private TextView tvTeammate;
     private TextView tvCountMethod;
 
+    private Button start_btn;
+    private ArrayList<String> names;
+
+
     private Boolean countMethodSelected = false;
 
     @Override
@@ -37,6 +42,7 @@ public class GameSettingActivity extends AppCompatActivity {
         tvParcour = findViewById(R.id.arrow21);
         tvTeammate = findViewById(R.id.teammates_value);
         tvCountMethod = findViewById(R.id.count_value);
+        start_btn = findViewById(R.id.btnContinue2);
 
         tvParcour.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -51,13 +57,22 @@ public class GameSettingActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQ_CODE_TEAMMATE);
             }
         });
-        
+
         tvCountMethod.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(GameSettingActivity.this, CountMethodSelection.class);
                 startActivityForResult(intent, REQ_CODE_COUNTMETHOD);
             }
         });
+
+        start_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(GameSettingActivity.this, GameEventActivity.class);
+                intent.putExtra("mates", names);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -76,8 +91,14 @@ public class GameSettingActivity extends AppCompatActivity {
 
         if(resultCode == REQ_CODE_TEAMMATE){
             int amount = data.getIntExtra("amount", -1);
-            ArrayList<String> names = data.getStringArrayListExtra("names");
+            names = data.getStringArrayListExtra("names");
             tvTeammate.setText(amount + "");
+            if(amount > 0){
+                start_btn.setEnabled(true);
+            }else{
+                start_btn.setEnabled(false);
+            }
+
         }
 
         if(resultCode == REQ_CODE_COUNTMETHOD){
@@ -87,14 +108,8 @@ public class GameSettingActivity extends AppCompatActivity {
                 countMethodSelected = false;
             }else{
                 countMethodSelected = true;
-
             }
             tvCountMethod.setText(name);
-
         }
-
-
-
     }
-
 }

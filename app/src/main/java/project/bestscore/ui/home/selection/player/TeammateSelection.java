@@ -2,6 +2,7 @@ package project.bestscore.ui.home.selection.player;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,6 +73,9 @@ public class TeammateSelection extends AppCompatActivity {
             }
         });
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+        itemTouchHelper.attachToRecyclerView(rvPlayers);
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +112,21 @@ public class TeammateSelection extends AppCompatActivity {
             adapter.newTeammate(newTeammate);
         }
     }
+    private ItemTouchHelper.Callback createHelperCallback() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                        adapter.deleteItem(viewHolder.getAdapterPosition());
+                    }
+                };
+        return simpleItemTouchCallback;
+    }
 
     public void addSelectedTeammate(Teammate teammate) {
         teammatesSelected.add(teammate);
@@ -115,5 +134,6 @@ public class TeammateSelection extends AppCompatActivity {
 
     public void deleteSelectedTeammate(Teammate teammate) {
         teammatesSelected.remove(teammate);
+
     }
 }

@@ -10,6 +10,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,14 +29,16 @@ public class CountMethodSelection extends AppCompatActivity {
     private SearchView svSearch;
     private Context context;
     private Button btnContinue;
-    private List<CountMethod> countMethodSelected;
+    private CountMethod countMethodSelected;
+    private CountMethodSelectionHolder countMethodSelectionHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countmethod_selection);
 
-        countMethodSelected = new ArrayList<>();
+        countMethodSelected = null;
+        countMethodSelectionHolder = null;
 
         rvCountMethod = findViewById(R.id.rvCountMethods);
         btnAdd = findViewById(R.id.btnAdd);
@@ -73,17 +76,23 @@ public class CountMethodSelection extends AppCompatActivity {
             }
         });
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+        itemTouchHelper.attachToRecyclerView(rvCountMethod);
+
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
-                if(!countMethodSelected.isEmpty()){
-                    intent.putExtra("name", countMethodSelected.get(0).getCountMethodName());
+                if(countMethodSelected != null){
+                    intent.putExtra("name", countMethodSelected.getCountMethodName());
                 }
                 setResult(GameSettingActivity.REQ_CODE_COUNTMETHOD, intent);
                 finish();
             }
         });
+
+        btnContinue.setEnabled(false);
     }
 
     @Override
@@ -97,18 +106,50 @@ public class CountMethodSelection extends AppCompatActivity {
         }
     }
 
-    public CountMethod getCountMethodSelected() {
-        return countMethodSelected.get(0);
+    private ItemTouchHelper.Callback createHelperCallback(){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove( RecyclerView recyclerView,  RecyclerView.ViewHolder viewHolder,  RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped( RecyclerView.ViewHolder viewHolder, int direction) {
+                        deleteItem(viewHolder.getAdapterPosition());
+                    }
+                };
+        return simpleItemTouchCallback;
     }
-    public List<CountMethod>  getCountMethodsSelected() {
+
+    private void deleteItem(final int position) {
+
+        //adapter.notifyItemRemoved(position);
+        adapter.deleteItem(position);
+    }
+
+    public CountMethod getCountMethodSelected() {
         return countMethodSelected;
     }
 
-    public void addSelectedCountMethod(CountMethod countMethod){
-        countMethodSelected.add(countMethod);
+    public void addSelectedCountMethod(CountMethod countMethod) {
+        countMethodSelected = countMethod;
     }
 
-    public void deleteSelectedCountMethod(CountMethod countMethod){
-        countMethodSelected.remove(countMethod);
+    public void deleteSelectedCountMethod(){
+        countMethodSelected = null;
+    }
+
+    public void setSelectionHolder(CountMethodSelectionHolder holder){
+        countMethodSelectionHolder = holder;
+    }
+
+    public void changeColor(){
+        countMethodSelectionHolder.getClBackground().setBackgroundResource(R.drawable.list_background_rounded);
+        countMethodSelectionHolder.setSelected(false);
+    }
+
+    public void setBtnContinue(boolean enable) {
+        btnContinue.setEnabled(enable);
     }
 }

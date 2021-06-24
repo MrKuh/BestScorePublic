@@ -154,6 +154,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return teammateList;
     }
 
+    public Teammate getTeammate(String teammateName) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT " +  TEAMMATE_ID + " FROM " + TEAMMATE + " WHERE " + TEAMMATE_NAME +  " = \""
+                + teammateName + "\"", null);
+        cursor.moveToFirst();
+
+        String teammate_name = cursor.getString(cursor.getColumnIndex(TEAMMATE_NAME));
+        int teammate_wins = cursor.getInt(cursor.getColumnIndex(TEAMMATE_WINS));
+        int teammate_id = cursor.getInt(cursor.getColumnIndex(TEAMMATE_ID));
+
+        return new Teammate(teammate_name, teammate_wins, teammate_id);
+    }
+
     public int getTeammateId(String teammateName){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 

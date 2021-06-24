@@ -20,13 +20,12 @@ import project.bestscore.data.Teammate;
 import project.bestscore.ui.home.selection.player.TeammateSelection;
 import project.bestscore.ui.home.selection.player.TeammateSelectionAdapter;
 
-public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
+public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView tvNameOfParcour;
     private ConstraintLayout clBackground;
     private ParcourSelection parcourSelection;
     private ParcourSelectionAdapter adapter;
     private boolean selected;
-    private final GestureDetectorCompat mGestureDetector;
     private static final String TAG = "MyApp";
 
 
@@ -38,9 +37,6 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
         this.adapter = adapter;
         selected = false;
 
-        project.bestscore.ui.home.selection.parcour.ParcourSelectionHolder.MyGestureListener mgl = new project.bestscore.ui.home.selection.parcour.ParcourSelectionHolder.MyGestureListener();
-        mGestureDetector = new GestureDetectorCompat(context, mgl);
-        itemView.setOnTouchListener(this);
         itemView.setOnClickListener(this);
     }
 
@@ -49,55 +45,45 @@ public class ParcourSelectionHolder extends RecyclerView.ViewHolder implements V
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
-    }
-
-    @Override
     public void onClick(View v) {
-        if(!selected && parcourSelection.getParcourSelected().size() < 1){
-            selected = true;
-            parcourSelection.addSelectedParcour(adapter.getParcourList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
-        }else{
-            selected = false;
-            parcourSelection.deleteSelectedParcour(adapter.getParcourList().get(getAdapterPosition()));
-            clBackground.setBackgroundResource(R.drawable.list_background_rounded);
+        try{
+            if (!selected && parcourSelection.getParcourSelected() == null) {
+                selected = true;
+                parcourSelection.addSelectedParcour((adapter.getParcourList().get(getAdapterPosition())));
+                parcourSelection.setSelectionHolder(this);
+                clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
+                parcourSelection.setBtnContinue(true);
+
+            } else if (selected && parcourSelection.getParcourSelected().equals(adapter.getParcourList().get(getAdapterPosition()))) {
+                selected = false;
+                parcourSelection.deleteSelectedParcour();
+                parcourSelection.setSelectionHolder(null);
+                clBackground.setBackgroundResource(R.drawable.list_background_rounded);
+                parcourSelection.setBtnContinue(false);
+            } else {
+                selected = true;
+                parcourSelection.addSelectedParcour((adapter.getParcourList().get(getAdapterPosition())));
+                parcourSelection.changeColor();
+                parcourSelection.setSelectionHolder(this);
+                clBackground.setBackgroundResource(R.drawable.list_background_rounded_othercolor);
+                parcourSelection.setBtnContinue(true);
+            }
+        }catch (NullPointerException e){
+            System.out.println("error");
         }
+
     }
 
-    private class MyGestureListener
-            extends GestureDetector.SimpleOnGestureListener {
-        // Minimal and Maximal swipe distance.
-        private final int MIN_DIST = 70;
-        private final int MAX_DIST = 1000;
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2,
-                               float velocityX, float velocityY) {
-            float deltaX = e1.getX() - e2.getX();
-            float deltaY = e1.getY() - e2.getY();
-            float deltaXAbs = Math.abs(deltaX);
-            float deltaYAbs = Math.abs(deltaY);
-            if (deltaXAbs > MIN_DIST && deltaXAbs < MAX_DIST) {
-                if (deltaX > 0) {
-                    Log.i(TAG, "swipe left");
-                } else {
-                    Log.i(TAG, "swipe right");
-                    Parcour parcour = adapter.getParcourList().get(getAdapterPosition());
-                    adapter.getDatabaseHelper().deleteParcour(parcour);
-                    adapter.updateList();
-                    adapter.notifyDataSetChanged();
-                }
-            }
-            if (deltaYAbs > MIN_DIST && deltaXAbs < MAX_DIST) {
-                if (deltaY > 0) {
-                    Log.i(TAG, "swipe up");
-                } else {
-                    Log.i(TAG, "swipe down");
-                }
-            }
-            return false;
-        }
+    public ConstraintLayout getClBackground() {
+        return clBackground;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }
 

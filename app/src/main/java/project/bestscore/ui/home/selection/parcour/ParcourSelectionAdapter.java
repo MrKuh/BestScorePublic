@@ -42,6 +42,7 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
         updateList();
     }
 
+
     @NonNull
     @Override
     public ParcourSelectionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -88,6 +89,12 @@ public class ParcourSelectionAdapter extends RecyclerView.Adapter<ParcourSelecti
         notifyDataSetChanged();
     }
 
+    public void deleteItem(int position){
+        Parcour parcour = getParcourList().get(position);
+        getDatabaseHelper().deleteParcour(parcour);
+        updateList();
+        notifyDataSetChanged();
+    }
     public List<Parcour> getParcourList() {
         return parcourList;
     }

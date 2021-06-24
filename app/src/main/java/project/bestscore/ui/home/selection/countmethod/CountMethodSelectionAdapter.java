@@ -90,6 +90,12 @@ public class CountMethodSelectionAdapter extends RecyclerView.Adapter<CountMetho
         }
         notifyDataSetChanged();
     }
+    public void deleteItem(int position){
+        CountMethod countMethod = getCountMethodList().get(position);
+        getDatabaseHelper().deleteCountMethod(countMethod);
+        updateList();
+        notifyDataSetChanged();
+    }
 
     public List<CountMethod> getCountMethodList() {
         return countMethodList;

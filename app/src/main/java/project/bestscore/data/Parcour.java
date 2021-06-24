@@ -2,8 +2,8 @@ package project.bestscore.data;
 
 public class Parcour {
 
-    public int id;
-    public String name;
+    private int id;
+    private String name;
 
     public Parcour(String name) {
         this.name = name;

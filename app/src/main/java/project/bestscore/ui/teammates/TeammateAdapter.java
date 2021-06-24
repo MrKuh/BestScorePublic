@@ -112,4 +112,11 @@ public class TeammateAdapter extends RecyclerView.Adapter<TeammateViewholder> {
         teammateListAll = databaseHelper.getTeammates();
         filter(filter);
     }
+
+    public void deleteItem(int position){
+        Teammate mate = getTeammateList().get(position);
+        getDatabaseHelper().deleteTeammate(mate);
+        updateList();
+        notifyDataSetChanged();
+    }
 }

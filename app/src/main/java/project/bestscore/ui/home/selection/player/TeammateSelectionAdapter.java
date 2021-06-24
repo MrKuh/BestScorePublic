@@ -27,6 +27,7 @@ public class TeammateSelectionAdapter extends RecyclerView.Adapter<TeammateSelec
     private DatabaseHelper databaseHelper;
     private String filter = "";
     private TeammateSelection teammateSelection;
+    private TeammateSelectionViewholder holder;
 
     public TeammateSelectionAdapter(Context context, Activity activity, TeammateSelection teammateSelection) {
         this.context = context;
@@ -62,7 +63,7 @@ public class TeammateSelectionAdapter extends RecyclerView.Adapter<TeammateSelec
         TextView tvNameOfPlayer = view.findViewById(R.id.tvNameOfPlayer);
         TextView tvWinsOfPlayer = view.findViewById(R.id.tvWinsOfPlayer);
         ConstraintLayout clBackground = view.findViewById(R.id.clBackground);
-        TeammateSelectionViewholder holder = new TeammateSelectionViewholder(view, context, this, tvNameOfPlayer, tvWinsOfPlayer, clBackground, teammateSelection);
+        holder = new TeammateSelectionViewholder(view, context, this, tvNameOfPlayer, tvWinsOfPlayer, clBackground, teammateSelection);
         return holder;
     }
 
@@ -101,6 +102,15 @@ public class TeammateSelectionAdapter extends RecyclerView.Adapter<TeammateSelec
                 }
             }
         }
+        notifyDataSetChanged();
+    }
+
+    public void deleteItem(int position){
+        Teammate mate = getTeammateList().get(position);
+        getDatabaseHelper().deleteTeammate(mate);
+        teammateSelection.deleteSelectedTeammate(mate);
+        holder.getClBackground().setBackgroundResource(R.drawable.list_background_rounded);
+        updateList();
         notifyDataSetChanged();
     }
 

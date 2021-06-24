@@ -15,14 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import project.bestscore.R;
 import project.bestscore.data.Teammate;
 
-public class TeammateSelectionViewholder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnTouchListener {
+public class TeammateSelectionViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView tvNameOfPlayer;
     private TextView tvWinsOfPlayer;
     private ConstraintLayout clBackground;
     private TeammateSelection teammateSelection;
     private TeammateSelectionAdapter adapter;
     private boolean selected;
-    private final GestureDetectorCompat mGestureDetector;
     private static final String TAG = "MyApp";
 
 
@@ -35,9 +34,6 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
         this.adapter = adapter;
         selected = true;
 
-        MyGestureListener mgl = new MyGestureListener();
-        mGestureDetector = new GestureDetectorCompat(context, mgl);
-        itemView.setOnTouchListener(this);
         itemView.setOnClickListener(this);
     }
 
@@ -47,11 +43,6 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
 
     public TextView getTvWinsOfPlayer() {
         return tvWinsOfPlayer;
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
     }
 
     @Override
@@ -65,6 +56,10 @@ public class TeammateSelectionViewholder extends RecyclerView.ViewHolder impleme
             teammateSelection.deleteSelectedTeammate(adapter.getTeammateList().get(getAdapterPosition()));
             clBackground.setBackgroundResource(R.drawable.list_background_rounded);
         }
+    }
+
+    public ConstraintLayout getClBackground() {
+        return clBackground;
     }
 
     private class MyGestureListener

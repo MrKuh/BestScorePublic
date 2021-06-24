@@ -2,6 +2,7 @@ package project.bestscore.ui.home.selection.parcour;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,14 +29,16 @@ public class ParcourSelection extends AppCompatActivity {
     private SearchView svSearch;
     private Context context;
     private Button btnContinue;
-    private List<Parcour> parcourSelected;
+    private Parcour parcourSelected;
+    private ParcourSelectionHolder selectionHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parcour_selection);
 
-        parcourSelected = new ArrayList<>();
+        parcourSelected = null;
+        selectionHolder = null;
 
         rvParcour = findViewById(R.id.rvCountMethods);
         btnAdd = findViewById(R.id.btnAdd);
@@ -45,7 +48,7 @@ public class ParcourSelection extends AppCompatActivity {
 
         rvParcour.setHasFixedSize(true);
         rvParcour.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ParcourSelectionAdapter(this,this,this);
+        adapter = new ParcourSelectionAdapter(this, this, this);
         rvParcour.setAdapter(adapter);
 
 
@@ -62,7 +65,7 @@ public class ParcourSelection extends AppCompatActivity {
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener(){
+        btnAdd.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -71,39 +74,81 @@ public class ParcourSelection extends AppCompatActivity {
             }
         });
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(createHelperCallback());
+        itemTouchHelper.attachToRecyclerView(rvParcour);
+
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
-                if(!parcourSelected.isEmpty()){
-                    intent.putExtra("name", parcourSelected.get(0).getParcourName());
+                if (parcourSelected != null) {
+                    intent.putExtra("name", parcourSelected.getParcourName());
                 }
                 setResult(GameSettingActivity.REQ_CODE_PARCOUR, intent);
                 finish();
             }
         });
+
+        btnContinue.setEnabled(false);
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 101 && resultCode == 21){
+        if (requestCode == 101 && resultCode == 21) {
             String name = data.getStringExtra("name");
             Parcour newParcour = new Parcour(name);
             adapter.newParcour(newParcour);
         }
     }
 
-    public List<Parcour> getParcourSelected() {
+    private ItemTouchHelper.Callback createHelperCallback() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback =
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                        deleteItem(viewHolder.getAdapterPosition());
+                    }
+                };
+        return simpleItemTouchCallback;
+    }
+
+    private void deleteItem(final int position) {
+
+        //adapter.notifyItemRemoved(position);
+        adapter.deleteItem(position);
+    }
+
+
+    public Parcour getParcourSelected() {
         return parcourSelected;
     }
 
-    public void addSelectedParcour(Parcour parcour){
-        parcourSelected.add(parcour);
+    public void addSelectedParcour(Parcour parcour) {
+        parcourSelected = parcour;
     }
 
-    public void deleteSelectedParcour(Parcour parcour){
-        parcourSelected.remove(parcour);
+    public void deleteSelectedParcour() {
+        parcourSelected = null;
+    }
+
+    public void setSelectionHolder(ParcourSelectionHolder holder) {
+        selectionHolder = holder;
+    }
+
+    public void changeColor() {
+        selectionHolder.getClBackground().setBackgroundResource(R.drawable.list_background_rounded);
+        selectionHolder.setSelected(false);
+    }
+
+    public void setBtnContinue(boolean enable) {
+        btnContinue.setEnabled(enable);
     }
 }
